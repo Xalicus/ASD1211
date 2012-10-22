@@ -1,0 +1,84 @@
+/*
+Author: Kevin Ward
+Class: ASD1210
+*/
+
+var json = {
+	"pet1": {
+		"kool1": "Kool",
+		"petGroups": "Dogs",
+		"petName": "Snoopy",
+		"petEmail": "Snoopy@petmail.com",
+		"genderValue": "Male",
+		"favePet": "Yes",
+		"birthDate": "2005-04-15",
+		"koolness": "50",
+		"comments": "He's so cute!"
+	},
+	"pet2": {
+		"kool1": "Kool",
+		"petGroups": "Reptiles",
+		"petName": "Jasmine",
+		"petEmail": "Jasmine@petmail.com",
+		"genderValue": "Female",
+		"favePet": "Yes",
+		"birthDate": "2011-09-14",
+		"koolness": "45",
+		"comments": "She looks like a dinosaur!"
+	},
+	"pet3": {
+		"kool1": "Kool",
+		"petGroups": "Dogs",
+		"petName": "Fenix",
+		"petEmail": "Fenix@petmail.com",
+		"genderValue": "Female",
+		"favePet": "Yes",
+		"birthDate": "2007-07-07",
+		"koolness": "100",
+		"comments": "She's so vicious!"
+	},
+	"pet4": {
+		"kool1": "Kool",
+		"petGroups": "Mythical",
+		"petName": "Katrina",
+		"petEmail": "Katt@petmail.com",
+		"genderValue": "Female",
+		"favePet": "Yes",
+		"birthDate": "1987-12-12",
+		"koolness": "1000",
+		"comments": "The best Werewolf out there!"
+	},
+	"pet5": {
+		"kool1": "Lame",
+		"petGroups": "Mythical",
+		"petName": "Null",
+		"petEmail": "Null@null.com",
+		"genderValue": "Null",
+		"favePet": "No",
+		"birthDate": "2099-01-01",
+		"koolness": "0",
+		"comments": "NULL"
+	},
+	"pet6": {
+		"kool1": "Lame",
+		"petGroups": "Dogs",
+		"petName": "Harley",
+		"petEmail": "Harley@petmail.com",
+		"genderValue": "Male",
+		"favePet": "No",
+		"birthDate": "2012-02-07",
+		"koolness": "10",
+		"comments": "Harley is such a menace... A Phantom Menace!"
+	},
+	"pet7": {
+		"kool1": "Kool",
+		"petGroups": "Cats",
+		"petName": "Blacky",
+		"petEmail": "Blacky@petmail.com",
+		"genderValue": "Male",
+		"favePet": "Yes",
+		"birthDate": "1992-10-02",
+		"koolness": "100",
+		"comments": "My first cat, growing up."
+	}
+};

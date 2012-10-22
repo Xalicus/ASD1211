@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+/*
+Author: Kevin Ward
+Class: ASD1210
+*/
+
+<data>
+	<item>
+		<kool1>"What is your Pet? ", "on"</kool1>
+		<petGroups>"KoolPet Type: ", "Mythical"</petGroups>
+		<petName>"KoolPet\'s Name: ", "Drako"</petName>
+		<petEmail>"KoolPet Email: ", "Drako@petmail.com"</petEmail>
+		<genderValue>"Gender: ", "Male"</genderValue>
+		<favePet>"Favorite KoolPet: ", "Yes"</favePet>
+		<birthdate>"Date of Birth: ", "0001-01-01"</birthdate>
+		<koolness>"Koolness Factor: ", "100"</koolness>
+		<comments>"Comments: ", "No, I do not taste good with Ketchup!"</comments>
+	</item>
+	<item>
+		<kool1>"What is your Pet? ", "on"</kool1>
+		<petGroups>"KoolPet Type:", "Mythical"</petGroups>
+		<petName>"KoolPet\'s Name:", "Unicorn Joe"],</petName>
+		<petEmail>"petEmail": ["KoolPet Email:", "UJoe@petmail.com"],</petEmail>
+		<genderValue>"genderValue": ["Gender:", "Male"],</genderValue>
+		<favePet>"favePet": ["Favorite KoolPet:", "No"],</favePet>
+		<birthdate>"birthDate": ["Date of Birth:", "1900-07-01"],</birthdate>
+		<koolness>"koolness": ["Koolness Factor:", "75"],</koolness>
+		<comments>"comments": ["Comments:", "Unicorn Joe to the rescue!"]</comments>
+	</item>
+	<item>
+		<kool1>"What is your Pet? ", "on"</kool1>
+		<petGroups>"petGroups": ["KoolPet Type:", "Rodents"],</petGroups>
+		<petName>"petName": ["KoolPet\'s Name:", "Chrome"],</petName>
+		<petEmail>"petEmail": ["KoolPet Email:", "Chrome@petmail.com"],</petEmail>
+		<genderValue>"genderValue": ["Gender:", "Female"],</genderValue>
+		<favePet>"favePet": ["Favorite KoolPet:", "No"],</favePet>
+		<birthdate>"birthDate": ["Date of Birth:", "2006-03-14"],</birthdate>
+		<koolness>"koolness": ["Koolness Factor:", "60"],</koolness>
+		<comments>"comments": ["Comments:", "Mouse Sister to Ginger."]</comments>
+	}
+	</item>
+	<item>
+		<kool1>"What is your Pet? ", "on"</kool1>
+		<petGroups>"petGroups": ["KoolPet Type:", "Rodents"],</petGroups>
+		<petName>"petName": ["KoolPet\'s Name:", "Carmella"],</petName>
+		<petEmail>"petEmail": ["KoolPet Email:", "Carmella@petmail.com"],</petEmail>
+		<genderValue>"genderValue": ["Gender:", "Female"],</genderValue>
+		<favePet>"favePet": ["Favorite KoolPet:", "No"],</favePet>
+		<birthdate>"birthDate": ["Date of Birth:", "2006-03-14"],</birthdate>
+		<koolness>"koolness": ["Koolness Factor:", "60"],</koolness>
+		<comments>"comments": ["Comments:", "Mouse sister to Ginger."]</comments>
+	}
+	</item>
+	<item>
+		<kool1>"What is your Pet? ", "on"</kool1>
+		<petGroups>"petGroups": ["KoolPet Type:", "Rodents"],</petGroups>
+		<petName>"petName": ["KoolPet\'s Name:", "Ginger"],</petName>
+		<petEmail>"petEmail": ["KoolPet Email:", "Ginger@petmail.com"],</petEmail>
+		<genderValue>"genderValue": ["Gender:", "Female"],</genderValue>
+		<favePet>"favePet": ["Favorite KoolPet:", "No"],</favePet>
+		<birthdate>"birthDate": ["Date of Birth:", "2006-03-14"],</birthdate>
+		<koolness>"koolness": ["Koolness Factor:", "60"],</koolness>
+		<comments>"comments": ["Comments:", "She had a litter of 11 mouse babies."]</comments>
+	}
+	</item>
+	<item>
+		<kool1>"What is your Pet? ", "on"</kool1>
+		<petGroups>"petGroups": ["KoolPet Type:", "Reptiles"],</petGroups>
+		<petName>"petName": ["KoolPet\'s Name:", "Repty"],</petName>
+		<petEmail>"petEmail": ["KoolPet Email:", "Repty@petmail.com"],</petEmail>
+		<genderValue>"genderValue": ["Gender:", "Male"],</genderValue>
+		<favePet>"favePet": ["Favorite KoolPet:", "No"],</favePet>
+		<birthdate>"birthDate": ["Date of Birth:", "2002-07-01"],</birthdate>
+		<koolness>"koolness": ["Koolness Factor:", "20"],</koolness>
+		<comments>"comments": ["Comments:", "Good Snake, don't bite me."]</comments>
+	}
+	</item>
+	<item>
+		<kool1>"What is your Pet? ", "on"</kool1>
+		<petGroups>"petGroups": ["KoolPet Type:", "Mythical"],</petGroups>
+		<petName>"petName": ["KoolPet\'s Name:", "Tiny"],</petName>
+		<petEmail>"petEmail": ["KoolPet Email:", "Tiny@petmail.com"],</petEmail>
+		<genderValue>"genderValue": ["Gender:", "Male"],</genderValue>
+		<favePet>"favePet": ["Favorite KoolPet:", "No"],</favePet>
+		<birthdate>"birthDate": ["Date of Birth:", "1901-12-31"],</birthdate>
+		<koolness>"koolness": ["Koolness Factor:", "80"],</koolness>
+		<comments>"comments": ["Comments:", "Hippos are fun."]</comments>
+	}
+	</item>
+</data>
