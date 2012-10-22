@@ -1,8 +1,3 @@
-/*
-Author: Kevin Ward
-Class: ASD1210
-*/
-
 kool1,petGroups,petName,petEmail,genderValue,favePet,birthdate,koolness,comments
 off,Cats,Katty,"Katty@petmail.com",Female,No,2012-01-01,25,"She's so cute!"
 off,Rodents,Ratigan,"Ratigan@petmail.com",Male,No,2003-05-02,35,"I am the pumpkin king!"

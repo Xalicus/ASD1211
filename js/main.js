@@ -1,6 +1,6 @@
 /*
 Author: Kevin Ward
-Class: ASD1210
+Class: ASD1211
 */
 
 $("#home").on("pageinit", function(){
