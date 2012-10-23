@@ -3,30 +3,17 @@ Author: Kevin Ward
 Class: ASD1211
 */
 
-$("#home").on("pageinit", function(){
+$('#home').on("pageshow", function(){
 	
 	// Home page code goes here.
 	$("header nav")
 		.slideDown()
 	;
-	
-	/*$('<a href="#">Link</a>')
-		.appendTo('#nav')
-		.wrap('<p />')
-		.bind('click', function(){
-			console.log('nav event!');
-			$(this).parent().addClass('active')
-			return false;
-		})
-	;*/
-	
-	//mouseenter mouseleave
-	//focusin focusout
 
 }); // End code for home page.
 
 
-$('#addItem').on('pageinit', function(){
+$('#addItem').on("pageinit", function(){
 
 	$('#petsForm div').on('click', function(e){
 		console.log(e);

@@ -23,9 +23,12 @@ Class: ASD1211
 	
 	<!-- StyleSheets under here -->
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" />
-	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<link rel="stylesheet" type="text/css" href="css/main.css" />
 	
 	<!-- JavaScript is normally at the end of the body, except for Modernizr which enables HTML5 elements & feature detects -->
+	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.js"></script>
+	<script src="js/libs/jquery.validate.min.js" type="text/javascript"></script>
 	<script src="js/libs/modernizr.custom.min.js"></script>
 
 </head>
@@ -154,14 +157,6 @@ Class: ASD1211
 					<ul id="errors"></ul>
 					
 					<ul id="questions">
-						<div data-role="fieldcontain">
-							<label for="kool1">What is your pet?:</label>
-							<select data-role="slider">
-								<option value="off">Lame</option>
-								<option value="on">Kool</option>
-							</select>
-						</div>
-						
 						<div data-role="fieldcontain" name="petsType" id="petsType">
 							<label for="petsType">KoolPet Type: *</label>
 							<br />
@@ -185,13 +180,6 @@ Class: ASD1211
 						</div>
 						
 						<div data-role="fieldcontain">
-							<label for="petEmail">KoolPet Email: *</label>
-							<br />
-								<input type="email" name="petEmail" id="petEmail" value="" class="required" email />
-								<p id="greyText">Example: example@petmail.com</p>
-						</div>
-						
-						<div data-role="fieldcontain">
 							<fieldset data-role="controlgroup" data-type="horizontal">
 								<legend for="genderValue">Gender: *</legend>
 								<br />
@@ -209,12 +197,6 @@ Class: ASD1211
 									<option value="off">No</option>
 									<option value="on">Yes</option>
 								</select>
-						</div>
-						
-						 <div data-role="fieldcontain">
-							<label for="birthDate">Date of Birth: *</label>
-							<br />
-							<input type="date" class="ignoreValidation" name="birthDate" id="birthDate" value="" />
 						</div>
 						
 						<div data-role="fieldcontain">
@@ -272,7 +254,6 @@ Class: ASD1211
 		<div data-role="content" id="petsForm" data-theme="b">
 		
 			<nav id="showLoseAdd">
-				<a href="#showItem" id="showData" style="display:none;" data-role="button" data-mini="true" data-inline="true" data-ajax="false" rel="external">Show KoolPets</a> 
 				<a href="#addItem" id="clearData" data-role="button" data-mini="true" data-inline="true" data-ajax="false" rel="external">Release all KoolPets</a> 
 				<a href="#addItem" id="addNew" data-role="button" data-mini="true" data-inline="true" data-ajax="false" rel="external">Add New KoolPet</a>
 			</nav>
@@ -289,6 +270,14 @@ Class: ASD1211
 						</fieldset>
 					</form>
 				</div> <!-- end searchPets -->
+				
+				<br />
+				
+				<ul id="petList" data-role="listview" data-theme="b">
+				
+				</ul>
+				
+				<br />
 			
 			</div> <!-- end items -->
 			
@@ -382,6 +371,26 @@ Class: ASD1211
 			<div id="news1">
 				<div data-role="fieldcontain">
 				<h3>KoolPetsDex News of DOOM!</h3>
+				</div>
+				
+				<div data-role="fieldcontain">
+				<h4>November 12th, 2012</h4>
+				<p>Started ASD 1211 Week 4.</p>
+				</div>
+				
+				<div data-role="fieldcontain">
+				<h4>November 5th, 2012</h4>
+				<p>Started ASD 1211 Week 3.</p>
+				</div>
+				
+				<div data-role="fieldcontain">
+				<h4>October 29th, 2012</h4>
+				<p>Started ASD 1211 Week 2.</p>
+				</div>
+				
+				<div data-role="fieldcontain">
+				<h4>October 22nd, 2012</h4>
+				<p>Started ASD 1211 Week 1.</p>
 				</div>
 				
 				<div data-role="fieldcontain">
@@ -533,10 +542,6 @@ Class: ASD1211
 	
 
 	<!-- JavaScript under here -->
-	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
-	<script src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.js"></script>
-	<script src="js/libs/jquery.validate.min.js" type="text/javascript"></script>
-	<script src="js/json.js" type="text/javascript"></script>
 	<script src="js/main.js" type="text/javascript"></script>
 
 	
