@@ -13,7 +13,7 @@ $('#home').on("pageshow", function(){
 }); // End code for home page.
 
 
-$('#addItem').on("pageinit", function(){
+$('#addItem').on("pageshow", function(){
 
 	$('#petsForm div').on('click', function(e){
 		console.log(e);
@@ -23,6 +23,10 @@ $('#addItem').on("pageinit", function(){
 	$('#petName').val("Enter KoolPet Name here!");
 	$('#petName').on('click', function() {
 		$('#petName').val("");
+	});
+	$('#comments').val("Place comments like birthday and others here.");
+	$('#comments').on('click', function() {
+		$('#comments').val("");
 	});
 
 	var myForm = $('#petForm'),
@@ -48,52 +52,24 @@ $('#addItem').on("pageinit", function(){
 					storeData(key);
 			},
 			
-			dateToday: function() {
-				var today = new Date();
-				var day = today.getDate();
-				var month = today.getMonth() + 1;
-				var year = today.getFullYear();
-				
-				if (day < 10) {
-					day = day + "0";
-				}
-				
-				if (month < 10) {
-					month = "0" + month;
-				}
-				
-				today = month + "-" + day + "-" + year;
-				$('#birthDate').val(today);
-			}
-				//dateToday();
-			
-			/*$('#reset').on('click', function() {
+			$('#reset').on('click', function() {
 				// this is to reset the form
 				resetPF();
 				location.reload('#addItem');
 			});
 			var resetPF = function() {
-				$('#kool1').attr('checked', false);
 				$('#petName').val("");
 				$('#petGroups').val("");
-				$('#petEmail').val("");
 				$('#male').attr('checked', true);
 				$('#female').attr('checked', false);
 				$('#favePet').attr('checked', false);
 				dateToday();
 				$('#koolness').val(25);
 				$('#comments').val("");
-			};*/
+			};
 		});
 
 	//any other code needed for addItem page goes here
-
-
-	// My getElementById or gebi function
-//	var gebi = function(x){
-//		var theElement = document.getElementById(x);
-//		return theElement;
-//	};
 
 	// My Variables for the functions
 	var	genderValue;
@@ -131,15 +107,15 @@ $('#addItem').on("pageinit", function(){
 
 
 // My autoFillData function
-var autoFillData = function (){
+/*var autoFillData = function (){
 	// The actual JSON OBJECT data required for this to work is coming from the 
 	// json.js file, which is loaded from the html page.
 	// Store the JSON OBJECT into local storage.
 	for(var n in json) {
-		var id = Math.floor(Math.random()*1000001);
+		var id = Math.floor(Math.random()*10000001);
 		localStorage.setItem(id, JSON.stringify(json[n]));
 	};
-};
+};*/
 
 // My storeData function
 var storeData = function(key){
@@ -156,17 +132,11 @@ var storeData = function(key){
 	// Gather round ye olde form field values, and store in ye olde objects.
 	// Object props contain array with the form label and input value.
 	
-	//getSelectedRadio();
-	//getCheckboxValue();
-	
 	var pet					= {};
-		pet.kool1			= ["What is your Pet? ", $('input:slider[name=kool1]:true').val()];
 		pet.petGroups		= ["KoolPet Type: ", $('#petGroups').val()];
 		pet.petName			= ["KoolPet\'s Name: ", $('#petName').val()];
-		pet.petEmail		= ["KoolPet Email: ", $('#petEmail').val()];
 		pet.genderValue		= ["Gender: ", $('input:radio[name=genderValue]:checked').val()];
 		pet.favePet			= ["Favorite KoolPet: ", $('input:slider[name=favePet]:true').val()];
-		pet.birthDate		= ["Date of Birth: ", $('#birthDate').val()];
 		pet.koolness		= ["Koolness Factor: ", $('#koolness').val()];
 		pet.comments		= ["Comments: ", $('#comments').val()];
 	// Save data into Local Storage: Use Stringify to convert the object to a string.
@@ -176,37 +146,38 @@ var storeData = function(key){
 }; 
 
 // My getData function
-var getData = function(){
+/*var getData = function(){
 
 	toggleControls("on");
 	if(localStorage.length === 0) {
 		alert("There were no Pets, so KoolPets were added!");
 		autoFillData();
-	};
+	};*/
 	
 // This is to get images for the correct category.
 	var getImg = function(catName, makeSubList) {
-		var imgLi = document.createElement("div");
-		makeSubList.appendChild(imgLi);
-		var newImg = document.createElement("img");
+		var imgLi = $('div');
+		makeSubList.appendTo(imgLi);
+		var newImg = $('img');
 		var setSrc = newImg.attr("src", "images/" + catName + ".png");
-		imgLi.appendChild(newImg);
+		imgLi.appendTo(newImg);
 	};
 
 // My Make Item Links Function
 	// Create the edit and delete links for each stored item when displayed.
 	var makeItemLinks = function(key, linksLi) {
 		// Add edit single item link
-		var editLink = document.createElement("a");
-		editLink.href = "#addItem";
+		var editLink = $('a');
+		editLink.attr("href", "#addItem");
 		editLink.key = key;
 		var editText = "Edit KoolPet";
-		editLink.on("click", editItem);
-		editLink.innerHTML = editText;
-		linksLi.appendChild(editLink);
+		editLink.addClass("editLink")
+			.on('click', editItem);
+			.html(editText);
+		linksLi.appendTo(editLink);
 
 		// Add my line break
-		var breakTag = document.createElement("br");
+		var breakTag = $('br');
 		linksLi.appendChild(breakTag);
 
 
