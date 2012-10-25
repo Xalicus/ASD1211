@@ -74,9 +74,8 @@ $('#addItem').on("pageshow", function(){
 	// My Variables for the functions
 	var	genderValue;
 	var	faveValue = "No";
-	var	errMsg = $("#errors");
 	
-	var toggleControls = function(n) {
+	/*var toggleControls = function(n) {
 		switch(n) {
 			case "on":
 				$("#petForm").style.display = "none";
@@ -101,21 +100,10 @@ $('#addItem').on("pageshow", function(){
 			default:
 				return false;
 		};
-	};
+	};*/
 
 //The functions below can go inside or outside the pageinit function for the page in which it is needed.
 
-
-// My autoFillData function
-/*var autoFillData = function (){
-	// The actual JSON OBJECT data required for this to work is coming from the 
-	// json.js file, which is loaded from the html page.
-	// Store the JSON OBJECT into local storage.
-	for(var n in json) {
-		var id = Math.floor(Math.random()*10000001);
-		localStorage.setItem(id, JSON.stringify(json[n]));
-	};
-};*/
 
 // My storeData function
 var storeData = function(key){
@@ -144,15 +132,6 @@ var storeData = function(key){
 	console.log(key.val());
 	alert("Pet saved to the KoolPetsDex!");
 }; 
-
-// My getData function
-/*var getData = function(){
-
-	toggleControls("on");
-	if(localStorage.length === 0) {
-		alert("There were no Pets, so KoolPets were added!");
-		autoFillData();
-	};*/
 	
 // This is to get images for the correct category.
 	var getImg = function(catName, makeSubList) {
@@ -172,52 +151,53 @@ var storeData = function(key){
 		editLink.key = key;
 		var editText = "Edit KoolPet";
 		editLink.addClass("editLink")
-			.on('click', editItem);
+			.on('click', editItem)
 			.html(editText);
 		linksLi.appendTo(editLink);
 
 		// Add my line break
 		var breakTag = $('br');
-		linksLi.appendChild(breakTag);
+		linksLi.append(breakTag);
 
 
 		// Add delete single item link
-		var deleteLink = document.createElement("a");
-		deleteLink.href = "#addItem";
+		var deleteLink = $('a');
+		deleteLink.attr("href", "#addItem");
 		deleteLink.key = key;
 		var deleteText = "Release KoolPet";
-		deleteLink.on("click", deleteItem);
-		deleteLink.innerHTML = deleteText;
-		linksLi.appendChild(deleteLink);
+		deleteLink.addClass("deleteLink")
+			.on('click', deleteItem)
+			.html(deleteText);
+		linksLi.appendTo(deleteLink);
 	};
 	
 	// This is supposed to write data from Local Storage back to the browser.
-	var makeDiv = document.createElement("div");
+	var makeDiv = $('div');
 	// makeDiv.attr("id", "items"); // Found out I don't need this line anymore.
-	var makeList = document.createElement("ul");
+	var makeList = $('ul');
 	// makeDiv.appendChild(makeList); // Modified this line to work with my current code.
-	$("items").appendChild(makeList);
+	$('#petList').appendTo(makeList);
 	// This code should add the data to my page when I press show data.
-	document.body.appendChild(makeDiv);
-	$("items").style.display = "block";
+	$('#petList').append(makeDiv);
+	// $('petList').style.display = "block";
 	for (var i=0, len=localStorage.length; i<len; i++) {
-		var makeLi = document.createElement("li");
-		var linksLi = document.createElement("div");
-		makeList.appendChild(makeLi);
+		var makeLi = $('li');
+		var linksLi = $('div');
+		makeList.append(makeLi);
 		var key = localStorage.key(i);
 		var value = localStorage.getItem(key);
 		// Convert strings back to being an object from localStorage value.
 		var object = JSON.parse(value);
-		var makeSubList = document.createElement("div");
-		makeLi.appendChild(makeSubList);
+		var makeSubList = $('div');
+		makeLi.append(makeSubList);
 		// This next line is to grab the Img that fits the category it's in.
 		getImg(object.petGroups[1], makeSubList);
 		for (var n in object) {
-			var makeSubLi = document.createElement("div");
-			makeSubList.appendChild(makeSubLi);
+			var makeSubLi = $('div');
+			makeSubList.append(makeSubLi);
 			var optSubText = object[n][0] + " " + object[n][1];
-			makeSubLi.innerHTML = optSubText;
-			makeSubList.appendChild(linksLi);
+			makeSubLi.html(optSubText);
+			makeSubList.append(linksLi);
 		};
 		// Create the edit and delete buttons/link for each item in local storage.
 		makeItemLinks(localStorage.key(i), linksLi);
@@ -233,14 +213,8 @@ var storeData = function(key){
 		toggleControls("off");
 		
 		// Populate the form fields with current localStorage values.
-		if (item.kool1[1] == "On") {
-			$("kool1").attr("value", "on");
-		} else {
-			$("kool1").attr("value", "off");
-		};
 		$("petGroups").value = item.petGroups[1].val();
-		$("petName").value = item.petName[1];
-		$("petEmail").value = item.petEmail[1];
+		$("petName").value = item.petName[1].val();
 		var radios = document.forms[0].genderValue;
 		for (var i=0; i<radios.length; i++) {
 			if (radios[i].value == "Male" && item.genderValue[1] == "Male") {
@@ -252,9 +226,8 @@ var storeData = function(key){
 		if (item.favePet[1] == "Yes") {
 			$("favePet").attr("value", "On");
 		};
-		$("birthDate").value = item.birthDate[1];
-		$("koolness").value = item.koolness[1];
-		$("comments").value = item.comments[1];
+		$("koolness").value = item.koolness[1].val();
+		$("comments").value = item.comments[1].val();
 		
 		// Remove the initial listener from the input "save pet" button.
 		storeData.off("click", submit);
@@ -289,17 +262,22 @@ var clearDataStorage = function(){
 	if(localStorage.length === 0) {
 		alert("No KoolPets in the KoolPetsDex.");
 	} else {
-		localStorage.clear();
+		localStorage.empty();
 		alert("All KoolPets have been Released!");
 		window.location.reload();
 		return false;
 	};
 };
 
+var changePage = function(pageId) {
+	$('#' + pageId).trigger('pageshow');
+	$.mobile.changePage($('#' + pageId), {transition:"slide"});
+};
+
 }); // End code for page.
 
 
-$("#showItem").on("pageinit", function(){
+$("#showItem").on("pageshow", function(){
 	// Page code goes here.
 	$("header nav")
 		.slideDown()
@@ -309,7 +287,12 @@ $("#showItem").on("pageinit", function(){
 		if ($('#searchField').val() === "") {
 			$('#searchResults').html("");
 		}
-	}
+	};
+
+var changePage = function(pageId) {
+	$('#' + pageId).trigger('pageshow');
+	$.mobile.changePage($('#' + pageId), {transition:"slide"});
+};
 
 var search = function() {
 	var getInput = $('#searchField').val();
@@ -344,81 +327,123 @@ $("#filter").keyup(function(){
 
 	// Update the count
 	var numberItems = count;
-	$("#filter-count").text("Number of KoolPets = "+count);
+	$("#filter-count").text("Number of KoolPets = " + count);
 }); // end live search
-
 
 }; // end search function
 
 // Function to call the JSON data.
 var showJSON = $.ajax({
-		url			: 'data/data.json',
-		type		: 'GET',
-		dataType	: 'json',
-		success		: function(data, status) {
-			console.log(status, data);
-		}
-    });
+	"url"			: 'data/data.json',
+	"type"			: 'GET',
+	"dataType"		: 'json',
+	"success"		: function(data) {
+		$('#items').empty();
+		for(var i=0, j=data.pets.length; i<j; i++){
+			var pet = data.pets[i];
+			$('' +
+				'<div class="jpets">' +
+					getImg(object.petGroups[1]) +
+					'<h2>'+ pet.petName +'</h2>' +
+					'<p>'+ pet.petGroups +'</p>' +
+					'<p>'+ pet.genderValue +'</p>' +
+					'<p>'+ pet.favePet +'</p>' +
+					'<p>'+ pet.koolness +'</p>' +
+					'<p>'+ pet.comments +'</p>' +
+				'</div>'
+			).appendTo('#items');
+		};
+		console.log(data);
+		changePage();
+		$('#items').listview('refresh');
+	},
+	error: function(data) {
+		console.log(data);
+	}
+});
+// end showjson function
 
 // Function to call the XML data.
-var showXML = $.ajax({
-		url			: 'data/data.xml',
-		type		: 'GET',
-		dataType 	: 'xml',
-		success		: function(data, status) {
-			console.log(status, data);
-		}
-	});
+$.ajax({
+	"url"			: 'data/data.xml',
+	"type"			: 'GET',
+	"dataType"	 	: 'xml',
+	"success"		: function(pets) {
+		$('#items').empty();
+		for(var i=0, j=pets.pet.length; i<j; i++){
+			var pet = pets.pet[i];
+			$(''+
+				'<div class="xpets">'+
+					getImg(object.petGroups[1], makeSubList) +
+					'<h2>'+ pet.petName +'</h2>'+
+					'<p>'+ pet.petGroups +'</p>'+
+					'<p>'+ pet.genderValue +'</p>'+
+					'<p>'+ pet.favePet +'</p>'+
+					'<p>'+ pet.koolness +'</p>'+
+					'<p>'+ pet.comments +'</p>'+
+				'</div>'
+			).appendTo('#items');
+		};
+		console.log(pets.pet);
+		changePage();
+		$('#items').listview('refresh');
+	},
+	error: function(pets) {
+		console.log(pets.pet);
+	}
+	
+});
+// end showxml function
 
 // Function to call the CSV data.
-var showCSV = $.ajax({
-		url			: 'data/data.csv',
-		type		: 'GET',
-		dataType	: 'csv',
-		success		: function(data, status) {
-			console.log(status, data);
-		}
-	});
+$.ajax({
+	"url"			: 'data/data.csv',
+	"type"			: 'GET',
+	"dataType"		: 'csv',
+	"success"		: function(data) {
+		$('#items').empty();
+		for(var i=0, j=data.pets.length; i<j; i++){
+			var pet = data.pets[i];
+			$(''+
+				'<div class="cpets">'+
+					getImg(object.petGroups[1], makeSubList) +
+					'<h2>'+ pet.petName +'</h2>'+
+					'<p>'+ pet.petGroups +'</p>'+
+					'<p>'+ pet.genderValue +'</p>'+
+					'<p>'+ pet.favePet +'</p>'+
+					'<p>'+ pet.koolness +'</p>'+
+					'<p>'+ pet.comments +'</p>'+
+				'</div>'
+			).appendTo('#items');
+		};
+		console.log(data);
+		changePage();
+		$('#items').listview('refresh');
+	},
+	error: function(data) {
+		console.log(data);
+	}
 	
-	
-}); // End code for page.
+});
+// end showcsv function
 
+// This is to get images for the correct category.
+var getImg = function(catName, makeSubList) {
+	var imgLi = $('div');
+	makeSubList.appendTo(imgLi);
+	var newImg = $('img');
+	var setSrc = newImg.attr("src", "images/" + catName + ".png");
+	imgLi.appendTo(newImg);
+};
 
-$("#info").on("pageinit", function(){
-	// Page code goes here.
-	$("header nav")
-		.slideDown()
-	;	
-}); // End code for page.
-
-
-$("#news").on("pageinit", function(){
-	// Page code goes here.
-	$("header nav")
-		.slideDown()
-	;	
-}); // End code for page.
-
-
-$("#cs").on("pageinit", function(){
-	// Page code goes here.
-	$("header nav")
-		.slideDown()
-	;	
-}); // End code for page.
-
-
-$("#addItemErrors").on("pageinit", function(){
-	// Page code goes here.
-	$("header nav")
-		.slideDown()
-	;	
-}); // End code for page.
 
 // My Variables
-	var showData = $("#showData");
-	showData.on("click", getData);
+	//var showData = $("#showData");
+	//showData.on('click', getData);
 	var clearLink = $("#clearData");	
-	clearLink.on("click", clearDataStorage);
+	clearLink.on('click', clearDataStorage);
 	var saveData = $("#submit");
-	saveData.on("click", storeData);
+	saveData.on('click', storeData);
+
+
+}); // End code for page.
