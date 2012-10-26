@@ -46,11 +46,11 @@ $('#addItem').on("pageshow", function(){
 				};
 				$("#addItemErrors ul").html(html);
 				
-			},
+			};
 			submitHandler: function() {
 				var data = myForm.serializeArray();
 					storeData(key);
-			},
+			};
 			
 			$('#reset').on('click', function() {
 				// this is to reset the form
@@ -63,7 +63,6 @@ $('#addItem').on("pageshow", function(){
 				$('#male').attr('checked', true);
 				$('#female').attr('checked', false);
 				$('#favePet').attr('checked', false);
-				dateToday();
 				$('#koolness').val(25);
 				$('#comments').val("");
 			};
