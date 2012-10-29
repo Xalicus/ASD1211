@@ -134,10 +134,10 @@ var storeData = function(key){
 	
 // This is to get images for the correct category.
 	var getImg = function(catName, makeSubList) {
-		var imgLi = $('div');
+		var imgLi = $('<div>');
 		makeSubList.appendTo(imgLi);
-		var newImg = $('img');
-		var setSrc = newImg.attr("src", "images/" + catName + ".png");
+		var newImg = $('<img>');
+		var setSrc = newImg.attr("<src>", "images/" + catName + ".png");
 		imgLi.appendTo(newImg);
 	};
 
@@ -145,7 +145,7 @@ var storeData = function(key){
 	// Create the edit and delete links for each stored item when displayed.
 	var makeItemLinks = function(key, linksLi) {
 		// Add edit single item link
-		var editLink = $('a');
+		var editLink = $('<a>');
 		editLink.attr("href", "#addItem");
 		editLink.key = key;
 		var editText = "Edit KoolPet";
@@ -155,12 +155,12 @@ var storeData = function(key){
 		linksLi.appendTo(editLink);
 
 		// Add my line break
-		var breakTag = $('br');
+		var breakTag = $('<br>');
 		linksLi.append(breakTag);
 
 
 		// Add delete single item link
-		var deleteLink = $('a');
+		var deleteLink = $('<a>');
 		deleteLink.attr("href", "#addItem");
 		deleteLink.key = key;
 		var deleteText = "Release KoolPet";
@@ -171,28 +171,28 @@ var storeData = function(key){
 	};
 	
 	// This is supposed to write data from Local Storage back to the browser.
-	var makeDiv = $('div');
+	var makeDiv = $('<div>');
 	// makeDiv.attr("id", "items"); // Found out I don't need this line anymore.
-	var makeList = $('ul');
+	var makeList = $('<ul>');
 	// makeDiv.appendChild(makeList); // Modified this line to work with my current code.
 	$('#petList').appendTo(makeList);
 	// This code should add the data to my page when I press show data.
 	$('#petList').append(makeDiv);
 	// $('petList').style.display = "block";
 	for (var i=0, len=localStorage.length; i<len; i++) {
-		var makeLi = $('li');
-		var linksLi = $('div');
+		var makeLi = $('<li>');
+		var linksLi = $('<div>');
 		makeList.append(makeLi);
 		var key = localStorage.key(i);
 		var value = localStorage.getItem(key);
 		// Convert strings back to being an object from localStorage value.
 		var object = JSON.parse(value);
-		var makeSubList = $('div');
+		var makeSubList = $('<div>');
 		makeLi.append(makeSubList);
 		// This next line is to grab the Img that fits the category it's in.
 		getImg(object.petGroups[1], makeSubList);
 		for (var n in object) {
-			var makeSubLi = $('div');
+			var makeSubLi = $('<div>');
 			makeSubList.append(makeSubLi);
 			var optSubText = object[n][0] + " " + object[n][1];
 			makeSubLi.html(optSubText);
@@ -212,8 +212,8 @@ var storeData = function(key){
 		toggleControls("off");
 		
 		// Populate the form fields with current localStorage values.
-		$("petGroups").value = item.petGroups[1].val();
-		$("petName").value = item.petName[1].val();
+		$("#petGroups").value = item.petGroups[1].val();
+		$("#petName").value = item.petName[1].val();
 		var radios = document.forms[0].genderValue;
 		for (var i=0; i<radios.length; i++) {
 			if (radios[i].value == "Male" && item.genderValue[1] == "Male") {
@@ -223,16 +223,16 @@ var storeData = function(key){
 			};
 		};
 		if (item.favePet[1] == "Yes") {
-			$("favePet").attr("value", "On");
+			$("#favePet").attr("value", "On");
 		};
-		$("koolness").value = item.koolness[1].val();
-		$("comments").value = item.comments[1].val();
+		$("#koolness").value = item.koolness[1].val();
+		$("#comments").value = item.comments[1].val();
 		
 		// Remove the initial listener from the input "save pet" button.
 		storeData.off("click", submit);
 		// Change SaveData button Value to Edit Button
 		// $("submit").value = "Edit KoolPet";
-		$("submit").val("Edit KoolPet!");
+		$("#submit").val("Edit KoolPet!");
 		var editSubmit = $("submit");
 		
 		// Save the key value established in this function as a prop of the editSubmit event
