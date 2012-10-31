@@ -71,7 +71,7 @@ $('#addItem').on("pageshow", function(){
 	//any other code needed for addItem page goes here
 
 	// My Variables for the functions
-	var	genderValue;
+	var	genVal;
 	var	faveValue = "No";
 	
 	/*var toggleControls = function(n) {
@@ -122,7 +122,7 @@ var storeData = function(key){
 	var pet					= {};
 		pet.petGroups		= ["KoolPet Type: ", $('#petGroups').val()];
 		pet.petName			= ["KoolPet\'s Name: ", $('#petName').val()];
-		pet.genderValue		= ["Gender: ", $('input:radio[name=genderValue]:checked').val()];
+		pet.genVal		= ["Gender: ", $('input:radio[name=genVal]:checked').val()];
 		pet.favePet			= ["Favorite KoolPet: ", $('input:slider[name=favePet]:true').val()];
 		pet.koolness		= ["Koolness Factor: ", $('#koolness').val()];
 		pet.comments		= ["Comments: ", $('#comments').val()];
@@ -214,11 +214,11 @@ var storeData = function(key){
 		// Populate the form fields with current localStorage values.
 		$("#petGroups").value = item.petGroups[1].val();
 		$("#petName").value = item.petName[1].val();
-		var radios = document.forms[0].genderValue;
+		var radios = document.forms[0].genVal;
 		for (var i=0; i<radios.length; i++) {
-			if (radios[i].value == "Male" && item.genderValue[1] == "Male") {
+			if (radios[i].value == "Male" && item.genVal[1] == "Male") {
 				radios[i].attr("checked", "checked");
-			} else if (radios[i].value == "Female" && item.genderValue[1] == "Female") {
+			} else if (radios[i].value == "Female" && item.genVal[1] == "Female") {
 				radios[i].attr("checked", "checked");
 			};
 		};
@@ -345,7 +345,7 @@ var showJSON = $.ajax({
 					getImg(object.petGroups[1]) +
 					'<h2>'+ pet.petName +'</h2>' +
 					'<p>'+ pet.petGroups +'</p>' +
-					'<p>'+ pet.genderValue +'</p>' +
+					'<p>'+ pet.genVal +'</p>' +
 					'<p>'+ pet.favePet +'</p>' +
 					'<p>'+ pet.koolness +'</p>' +
 					'<p>'+ pet.comments +'</p>' +
@@ -376,7 +376,7 @@ $.ajax({
 					getImg(object.petGroups[1], makeSubList) +
 					'<h2>'+ pet.petName +'</h2>'+
 					'<p>'+ pet.petGroups +'</p>'+
-					'<p>'+ pet.genderValue +'</p>'+
+					'<p>'+ pet.genVal +'</p>'+
 					'<p>'+ pet.favePet +'</p>'+
 					'<p>'+ pet.koolness +'</p>'+
 					'<p>'+ pet.comments +'</p>'+
@@ -408,7 +408,7 @@ $.ajax({
 					getImg(object.petGroups[1], makeSubList) +
 					'<h2>'+ pet.petName +'</h2>'+
 					'<p>'+ pet.petGroups +'</p>'+
-					'<p>'+ pet.genderValue +'</p>'+
+					'<p>'+ pet.genVal +'</p>'+
 					'<p>'+ pet.favePet +'</p>'+
 					'<p>'+ pet.koolness +'</p>'+
 					'<p>'+ pet.comments +'</p>'+
