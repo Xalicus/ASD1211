@@ -46,26 +46,27 @@ $('#addItem').on("pageshow", function(){
 				};
 				$("#addItemErrors ul").html(html);
 				
-			};
+			},
 			submitHandler: function() {
 				var data = myForm.serializeArray();
 					storeData(key);
-			};
+			}
 			
-			$('#reset').on('click', function() {
+			/*$('#reset').on('click', function() {
+				var resetPF = function() {
+					$('#petName').val("");
+					$('#petGroups').val("");
+					$('#male').attr('checked', true);
+					$('#female').attr('checked', false);
+					$('#favePet').attr('checked', false);
+					$('#koolness').val(25);
+					$('#comments').val("");
+				};
+				
 				// this is to reset the form
 				resetPF();
 				location.reload('#addItem');
-			});
-			var resetPF = function() {
-				$('#petName').val("");
-				$('#petGroups').val("");
-				$('#male').attr('checked', true);
-				$('#female').attr('checked', false);
-				$('#favePet').attr('checked', false);
-				$('#koolness').val(25);
-				$('#comments').val("");
-			};
+			});*/
 		});
 
 	//any other code needed for addItem page goes here
@@ -73,33 +74,7 @@ $('#addItem').on("pageshow", function(){
 	// My Variables for the functions
 	var	genVal;
 	var	faveValue = "No";
-	
-	/*var toggleControls = function(n) {
-		switch(n) {
-			case "on":
-				$("#petForm").style.display = "none";
-				$("#clearData").style.display = "inline";
-				$("#showData").style.display = "none";
-				$("#addNew").style.display = "inline";
-				$("#showJSON").style.display = "inline";
-				$("#showXML").style.display = "inline";
-				$("#showCSV").style.display = "inline";
-				$("#items").style.display = "inline";
-				break;
-			case "off":
-				$("#petForm").style.display = "block";
-				$("#clearData").style.display = "inline";
-				$("#showData").style.display = "inline";
-				$("#addNew").style.display = "none";
-				$("#showJSON").style.display = "inline";
-				$("#showXML").style.display = "inline";
-				$("#showCSV").style.display = "inline";
-				$("#items").style.display = "none";
-				break;
-			default:
-				return false;
-		};
-	};*/
+
 
 //The functions below can go inside or outside the pageinit function for the page in which it is needed.
 
@@ -134,11 +109,11 @@ var storeData = function(key){
 	
 // This is to get images for the correct category.
 	var getImg = function(catName, makeSubList) {
-		var imgLi = $('<div>');
-		makeSubList.appendTo(imgLi);
+		var imgLi = $('<li>');
+		makeSubList.append(imgLi);
 		var newImg = $('<img>');
-		var setSrc = newImg.attr("<src>", "images/" + catName + ".png");
-		imgLi.appendTo(newImg);
+		var setSrc = newImg.attr("src", "images/" + catName + ".png");
+		imgLi.append(newImg);
 	};
 
 // My Make Item Links Function
@@ -208,9 +183,6 @@ var storeData = function(key){
 		var value = localStorage.getItem(this.key);
 		var item = JSON.parse(value);
 		
-		// To show the form again
-		toggleControls("off");
-		
 		// Populate the form fields with current localStorage values.
 		$("#petGroups").value = item.petGroups[1].val();
 		$("#petName").value = item.petName[1].val();
@@ -241,7 +213,6 @@ var storeData = function(key){
 		editSubmit.key = this.key;
 	};
 
-};
 
 // My Delete Item Function
 var	deleteItem = function (){
@@ -332,13 +303,29 @@ $("#filter").keyup(function(){
 }; // end search function
 
 // Function to call the JSON data.
-var showJSON = $.ajax({
-	"url"			: 'data/data.json',
+$.ajax({
+	"url"			: 'xhr/data.json',
 	"type"			: 'GET',
 	"dataType"		: 'json',
-	"success"		: function(data) {
-		$('#items').empty();
-		for(var i=0, j=data.pets.length; i<j; i++){
+	"success"		: function(data, value) {
+		$('#petList').empty();
+		
+		var showJ = function(data, value) {
+			$.each(function(data, value) {
+				$('<div class="jpets">' +
+					getImg(object.petGroups[1]) +
+					'<li>' + value.petName + '</li>' +
+					'<li>' + value.petGroups + '</li>' +
+					'<li>' + value.genVal + '</li>' +
+					'<li>' + value.favePet + '</li>' +
+					'<li>' + value.koolnes + '</li>' +
+					'<li>' + value.comments + '</li>' +
+					'</div>'
+				).appendTo("#petList");
+			});
+		};
+		
+		/*for(var i=0, j=data.pets.length; i<j; i++){
 			var pet = data.pets[i];
 			$('' +
 				'<div class="jpets">' +
@@ -351,25 +338,48 @@ var showJSON = $.ajax({
 					'<p>'+ pet.comments +'</p>' +
 				'</div>'
 			).appendTo('#items');
-		};
+		};*/
+		var showJSONData = $("#sJ");
+		showJSONData.on('click', showJ);
 		console.log(data);
-		changePage();
-		$('#items').listview('refresh');
+		$.mobile.changePage("#showItem");
+		$('#petList').listview('refresh');
 	},
 	error: function(data) {
-		console.log(data);
+		console.log("Show JSON broke!" + data);
 	}
 });
 // end showjson function
 
 // Function to call the XML data.
 $.ajax({
-	"url"			: 'data/data.xml',
+	"url"			: 'xhr/data.xml',
 	"type"			: 'GET',
 	"dataType"	 	: 'xml',
-	"success"		: function(pets) {
+	"success"		: function(data) {
 		$('#items').empty();
-		for(var i=0, j=pets.pet.length; i<j; i++){
+		
+		var dataA = $.parseXML(pets);
+		var items = $( dataA );
+		items.find('li:first').each(function(){
+			var item = $(this);
+			$(''+
+				'<div class="xpets">' +
+					getImg(object.petGroups[1], makeSubList) +
+					'<h2>' + pet.petName + '</h2>' +
+					'<p>' + pet.petGroups + '</p>' +
+					'<p>' + pet.genVal + '</p>' +
+					'<p>' + pet.favePet + '</p>' +
+					'<p>' + pet.koolness + '</p>' +
+					'<p>' + pet.comments + '</p>' +
+				'</div>'
+			).appendTo('#items');
+			console.log("Name: ", item.find("petName"));
+		});
+		var showXML = $("#sX");
+		showXML.on('click', showXML);
+		
+		/*for(var i=0, j=pets.pet.length; i<j; i++){
 			var pet = pets.pet[i];
 			$(''+
 				'<div class="xpets">'+
@@ -382,13 +392,14 @@ $.ajax({
 					'<p>'+ pet.comments +'</p>'+
 				'</div>'
 			).appendTo('#items');
-		};
-		console.log(pets.pet);
-		changePage();
+		};*/
+		
+		//console.log(pets.pet);
+		$.mobile.changePage("#showItem");
 		$('#items').listview('refresh');
 	},
-	error: function(pets) {
-		console.log(pets.pet);
+	error: function(data) {
+		console.log(data);
 	}
 	
 });
@@ -396,9 +407,9 @@ $.ajax({
 
 // Function to call the CSV data.
 $.ajax({
-	"url"			: 'data/data.csv',
+	"url"			: 'xhr/data.csv',
 	"type"			: 'GET',
-	"dataType"		: 'csv',
+	"dataType"		: 'text',
 	"success"		: function(data) {
 		$('#items').empty();
 		for(var i=0, j=data.pets.length; i<j; i++){
@@ -416,7 +427,7 @@ $.ajax({
 			).appendTo('#items');
 		};
 		console.log(data);
-		changePage();
+		$.mobile.changePage("#showItem");
 		$('#items').listview('refresh');
 	},
 	error: function(data) {
@@ -428,11 +439,11 @@ $.ajax({
 
 // This is to get images for the correct category.
 var getImg = function(catName, makeSubList) {
-	var imgLi = $('div');
-	makeSubList.appendTo(imgLi);
-	var newImg = $('img');
+	var imgLi = $('<li>');
+	makeSubList.append(imgLi);
+	var newImg = $('<img>');
 	var setSrc = newImg.attr("src", "images/" + catName + ".png");
-	imgLi.appendTo(newImg);
+	imgLi.append(newImg);
 };
 
 
@@ -443,6 +454,12 @@ var getImg = function(catName, makeSubList) {
 	clearLink.on('click', clearDataStorage);
 	var saveData = $("#submit");
 	saveData.on('click', storeData);
+	var showJSONData = $("#showJSON");
+	showJSONData.on('click', showJSON);
+	var showXMLData = $("#showXML");
+	showXMLData.on('click', showXML);
+	var showCSVData = $("#showCSV");
+	showCSVData.on('click', showCSV);
 
 
 }); // End code for page.
