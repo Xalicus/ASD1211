@@ -244,6 +244,10 @@ var changePage = function(pageId) {
 	$.mobile.changePage($('#' + pageId), {transition:"slide"});
 };
 
+// My Variables
+	var saveData = $("#submit");
+	saveData.on('click', myForm.validate);
+
 }); // End code for page.
 
 
@@ -258,6 +262,18 @@ $("#showItem").on("pageshow", function(){
 			$('#searchResults').html("");
 		}
 	};
+
+// My Clear Data Function
+var clearDataStorage = function(){
+	if(localStorage.length === 0) {
+		alert("No KoolPets in the KoolPetsDex.");
+	} else {
+		localStorage.empty();
+		alert("All KoolPets have been Released!");
+		window.location.reload();
+		return false;
+	};
+};
 
 var changePage = function(pageId) {
 	$('#' + pageId).trigger('pageshow');
@@ -307,20 +323,19 @@ $.ajax({
 	"url"			: 'xhr/data.json',
 	"type"			: 'GET',
 	"dataType"		: 'json',
-	"success"		: function(data, value) {
+	"success"		: function(data) {
 		$('#petList').empty();
 		
 		var showJ = function(data) {
 			$.each(function(data) {
-				$('<div class="jpets">' +
+				$('' +
 					getImg(object.petGroups[1]) +
 					'<li>' + data.petName + '</li>' +
 					'<li>' + data.petGroups + '</li>' +
 					'<li>' + data.genVal + '</li>' +
 					'<li>' + data.favePet + '</li>' +
 					'<li>' + data.koolnes + '</li>' +
-					'<li>' + data.comments + '</li>' +
-					'</div>'
+					'<li>' + data.comments + '</li>'
 				).appendTo("#petList");
 			});
 		};
@@ -341,12 +356,13 @@ $.ajax({
 		};*/
 		var showJSONData = $("#sJ");
 		showJSONData.on('click', showJ);
-		console.log(data);
+		console.log(data.petName);
 		$.mobile.changePage("#showItem");
 		$('#petList').listview('refresh');
 	},
 	error: function(data) {
-		console.log("Show JSON broke!" + data);
+		console.log(data);
+		console.log("Show JSON broke!");
 	}
 });
 // end showjson function
@@ -356,23 +372,21 @@ $.ajax({
 	"url"			: 'xhr/data.xml',
 	"type"			: 'GET',
 	"dataType"	 	: 'xml',
-	"success"		: function(data, value) {
+	"success"		: function(data) {
 		$('#petList').empty();
 		
 		var dataA = $.parseXML(data);
 		var items = $( dataA );
-		items.find('li:petName').each(function(){
+		items.find('item').each(function(){
 			var item = $(this);
-			$(''+
-				'<div class="xpets">' +
-					getImg(object.petGroups[1], makeSubList) +
-					'<li>' + item.petName + '</li>' +
-					'<li>' + value.petGroups + '</li>' +
-					'<li>' + value.genVal + '</li>' +
-					'<li>' + value.favePet + '</li>' +
-					'<li>' + value.koolness + '</li>' +
-					'<li>' + value.comments + '</li>' +
-				'</div>'
+			$('' +
+				getImg(object.petGroups[1], makeSubList) +
+				'<li>' + item.petName + '</li>' +
+				'<li>' + item.petGroups + '</li>' +
+				'<li>' + item.genVal + '</li>' +
+				'<li>' + item.favePet + '</li>' +
+				'<li>' + item.koolness + '</li>' +
+				'<li>' + item.comments + '</li>'
 			).appendTo('#petList');
 			console.log("Name: ", item.find("petName"));
 		});
@@ -399,7 +413,8 @@ $.ajax({
 		$('#petList').listview('refresh');
 	},
 	error: function(data) {
-		console.log("Show XML Broke!" + data);
+		console.log(data);
+		console.log("Show XML Broke!");
 	}
 	
 });
@@ -413,7 +428,7 @@ $.ajax({
 	"success"		: function(data) {
 		$('#petList').empty();
 		
-		var showC = function(value) {
+		var showC = function(data) {
 
 			// Assume that your entire CSV file is in the data variable.
 			// The "\n" is the string escape for the end-of-line character.
@@ -428,15 +443,14 @@ $.ajax({
 			} // for lineNum
 			
 			$.each(function(columns) {
-				$('<div class="cpets">' +
+				$('' +
 					getImg(object.petGroups[1]) +
 					'<li>' + columns.petName + '</li>' +
 					'<li>' + columns.petGroups + '</li>' +
 					'<li>' + columns.genVal + '</li>' +
 					'<li>' + columns.favePet + '</li>' +
 					'<li>' + columns.koolnes + '</li>' +
-					'<li>' + columns.comments + '</li>' +
-					'</div>'
+					'<li>' + columns.comments + '</li>'
 				).appendTo("#petList");
 			});
 		}; // End showC Function
@@ -452,7 +466,8 @@ $.ajax({
 		$('#petList').listview('refresh');
 	},
 	error: function(data) {
-		console.log("Show CSV Broke!" + data);
+		console.log(data);
+		console.log("Show CSV Broke!");
 	}
 	
 });
@@ -469,16 +484,16 @@ var getImg = function(catName, makeSubList) {
 
 
 // My Variables
-	//var showData = $("#showData");
-	//showData.on('click', getData);
+	/*var showData = $("#showData");
+	showData.on('click', getData);*/
 	var clearLink = $("#clearData");	
 	clearLink.on('click', clearDataStorage);
-	var saveData = $("#submit");
-	saveData.on('click', myForm.validate);
-	var showJSON = $("#sJ");
-	showJSON.on('click', showJ);
-	var showXML = $("#sX");
-	showXML.on('click', showX);
+	/*var saveData = $("#submit");
+	saveData.on('click', myForm.validate);*/
+	/*var showJSON = $("#sJ");
+	showJSON.on('click', showJ);*/
+	/*var showXML = $("#sX");
+	showXML.on('click', showX);*/
 	/*var showCSV = $("#sC");
 	showCSV.on('click', showC);*/
 
