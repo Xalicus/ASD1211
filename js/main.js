@@ -72,8 +72,8 @@ $('#addItem').on("pageshow", function(){
 	//any other code needed for addItem page goes here
 
 	// My Variables for the functions
-	var	genVal;
-	var	faveValue = "No";
+	//var	genVal;
+	//var	faveValue = "No";
 
 
 //The functions below can go inside or outside the pageinit function for the page in which it is needed.
@@ -97,8 +97,8 @@ var storeData = function(key){
 	var pet					= {};
 		pet.petGroups		= ["KoolPet Type: ", $('#petGroups').val()];
 		pet.petName			= ["KoolPet\'s Name: ", $('#petName').val()];
-		pet.genVal		= ["Gender: ", $('input:radio[name=genVal]:checked').val()];
-		pet.favePet			= ["Favorite KoolPet: ", $('input:slider[name=favePet]:true').val()];
+		pet.genVal			= ["Gender: ", $('input:radio[name=genVal]:checked').val()];
+		pet.favePet			= ["Favorite KoolPet: ", $('input:slider[name=favePet]:on').val()];
 		pet.koolness		= ["Koolness Factor: ", $('#koolness').val()];
 		pet.comments		= ["Comments: ", $('#comments').val()];
 	// Save data into Local Storage: Use Stringify to convert the object to a string.
@@ -302,7 +302,7 @@ $("#filter").keyup(function(){
 
 }; // end search function
 
-// Function to call the JSON data.
+// AJAX function to call the JSON data.
 $.ajax({
 	"url"			: 'xhr/data.json',
 	"type"			: 'GET',
@@ -310,8 +310,8 @@ $.ajax({
 	"success"		: function(data, value) {
 		$('#petList').empty();
 		
-		var showJ = function(data, value) {
-			$.each(function(data, value) {
+		var showJ = function(value) {
+			$.each(function(value) {
 				$('<div class="jpets">' +
 					getImg(object.petGroups[1]) +
 					'<li>' + value.petName + '</li>' +
@@ -351,29 +351,29 @@ $.ajax({
 });
 // end showjson function
 
-// Function to call the XML data.
+// AJAX function to call the XML data.
 $.ajax({
 	"url"			: 'xhr/data.xml',
 	"type"			: 'GET',
 	"dataType"	 	: 'xml',
-	"success"		: function(data) {
-		$('#items').empty();
+	"success"		: function(data, value) {
+		$('#petList').empty();
 		
-		var dataA = $.parseXML(pets);
+		var dataA = $.parseXML(data);
 		var items = $( dataA );
-		items.find('li:first').each(function(){
+		items.find('li:petName').each(function(){
 			var item = $(this);
 			$(''+
 				'<div class="xpets">' +
 					getImg(object.petGroups[1], makeSubList) +
-					'<h2>' + pet.petName + '</h2>' +
-					'<p>' + pet.petGroups + '</p>' +
-					'<p>' + pet.genVal + '</p>' +
-					'<p>' + pet.favePet + '</p>' +
-					'<p>' + pet.koolness + '</p>' +
-					'<p>' + pet.comments + '</p>' +
+					'<li>' + item.petName + '</li>' +
+					'<li>' + value.petGroups + '</li>' +
+					'<li>' + value.genVal + '</li>' +
+					'<li>' + value.favePet + '</li>' +
+					'<li>' + value.koolness + '</li>' +
+					'<li>' + value.comments + '</li>' +
 				'</div>'
-			).appendTo('#items');
+			).appendTo('#petList');
 			console.log("Name: ", item.find("petName"));
 		});
 		var showXML = $("#sX");
@@ -396,42 +396,63 @@ $.ajax({
 		
 		//console.log(pets.pet);
 		$.mobile.changePage("#showItem");
-		$('#items').listview('refresh');
+		$('#petList').listview('refresh');
 	},
 	error: function(data) {
-		console.log(data);
+		console.log("Show XML Broke!" + data);
 	}
 	
 });
 // end showxml function
 
-// Function to call the CSV data.
+// AJAX function to call the CSV data.
 $.ajax({
 	"url"			: 'xhr/data.csv',
 	"type"			: 'GET',
 	"dataType"		: 'text',
 	"success"		: function(data) {
-		$('#items').empty();
-		for(var i=0, j=data.pets.length; i<j; i++){
-			var pet = data.pets[i];
-			$(''+
-				'<div class="cpets">'+
-					getImg(object.petGroups[1], makeSubList) +
-					'<h2>'+ pet.petName +'</h2>'+
-					'<p>'+ pet.petGroups +'</p>'+
-					'<p>'+ pet.genVal +'</p>'+
-					'<p>'+ pet.favePet +'</p>'+
-					'<p>'+ pet.koolness +'</p>'+
-					'<p>'+ pet.comments +'</p>'+
-				'</div>'
-			).appendTo('#items');
-		};
+		$('#petList').empty();
+		
+		var showC = function(value) {
+
+			// Assume that your entire CSV file is in the data variable.
+			// The "\n" is the string escape for the end-of-line character.
+			var lines = data.split("\n");
+			for (var lineNum = 0; lineNum < lines.length; lineNum++) {
+				// Get the current line/row
+				var row = lines[lineNum];
+				var columns = row.split(",");
+				// The columns variable is now an array.
+				return (columns);
+				console.log(columns);
+			} // for lineNum
+			
+			$.each(function(columns) {
+				$('<div class="cpets">' +
+					getImg(object.petGroups[1]) +
+					'<li>' + columns.petName + '</li>' +
+					'<li>' + columns.petGroups + '</li>' +
+					'<li>' + columns.genVal + '</li>' +
+					'<li>' + columns.favePet + '</li>' +
+					'<li>' + columns.koolnes + '</li>' +
+					'<li>' + columns.comments + '</li>' +
+					'</div>'
+				).appendTo("#petList");
+			});
+		}; // End showC Function
+		
+		var showCSV = $("#sC");
+		showCSV.on('click', showC);
+		
+		// $.csv.toArrays(csv, options, callback);
+		// console.log(csv, options, callback);
+		
 		console.log(data);
 		$.mobile.changePage("#showItem");
-		$('#items').listview('refresh');
+		$('#petList').listview('refresh');
 	},
 	error: function(data) {
-		console.log(data);
+		console.log("Show CSV Broke!" + data);
 	}
 	
 });
@@ -453,13 +474,13 @@ var getImg = function(catName, makeSubList) {
 	var clearLink = $("#clearData");	
 	clearLink.on('click', clearDataStorage);
 	var saveData = $("#submit");
-	saveData.on('click', storeData);
-	var showJSONData = $("#showJSON");
-	showJSONData.on('click', showJSON);
-	var showXMLData = $("#showXML");
-	showXMLData.on('click', showXML);
-	var showCSVData = $("#showCSV");
-	showCSVData.on('click', showCSV);
+	saveData.on('click', myForm.validate);
+	var showJSON = $("#sJ");
+	showJSON.on('click', showJ);
+	var showXML = $("#sX");
+	showXML.on('click', showX);
+	var showCSV = $("#sC");
+	showCSV.on('click', showC);
 
 
 }); // End code for page.
