@@ -2,12 +2,12 @@
 
 <data>
 	<item>
-		<petGroups>"KoolPet Type: ", "Mythical"</petGroups>
-		<petName>"KoolPet\'s Name: ", "Drako"</petName>
-		<genVal>"Gender: ", "Male"</genVal>
-		<favePet>"Favorite KoolPet: ", "Yes"</favePet>
-		<koolness>"Koolness Factor: ", "100"</koolness>
-		<comments>"Comments: ", "No, I do not taste good with Ketchup!"</comments>
+		<li>"KoolPet Type: ", "Mythical"</li>
+		<li>"KoolPet\'s Name: ", "Drako"</li>
+		<li>"Gender: ", "Male"</li>
+		<li>"Favorite KoolPet: ", "Yes"</li>
+		<li>"Koolness Factor: ", "100"</li>
+		<li>"Comments: ", "No, I do not taste good with Ketchup!"</li>
 	</item>
 	<item>
 		<petGroups>"KoolPet Type:", "Mythical"</petGroups>
