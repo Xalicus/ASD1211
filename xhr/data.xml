@@ -2,59 +2,59 @@
 
 <data>
 	<item>
-		<li>"KoolPet Type: ", "Mythical"</li>
-		<li>"KoolPet\'s Name: ", "Drako"</li>
-		<li>"Gender: ", "Male"</li>
-		<li>"Favorite KoolPet: ", "Yes"</li>
-		<li>"Koolness Factor: ", "100"</li>
-		<li>"Comments: ", "No, I do not taste good with Ketchup!"</li>
+		<petGroups>"Mythical"</petGroups>
+		<petName>"Drako"</petName>
+		<genVal>"Male"</genVal>
+		<favePet>"Yes"</favePet>
+		<koolness>"100"</koolness>
+		<comments>"No, I do not taste good with Ketchup!"</comments>
 	</item>
 	<item>
-		<petGroups>"KoolPet Type:", "Mythical"</petGroups>
-		<petName>"KoolPet\'s Name:", "Unicorn Joe"],</petName>
-		<genVal>"genVal": ["Gender:", "Male"],</genVal>
-		<favePet>"favePet": ["Favorite KoolPet:", "No"],</favePet>
-		<koolness>"koolness": ["Koolness Factor:", "75"],</koolness>
-		<comments>"comments": ["Comments:", "Unicorn Joe to the rescue!"]</comments>
+		<petGroups>"Mythical"</petGroups>
+		<petName>"Unicorn Joe"],</petName>
+		<genVal>"Male"</genVal>
+		<favePet>"No"</favePet>
+		<koolness>"75"</koolness>
+		<comments>"Unicorn Joe to the rescue!"</comments>
 	</item>
 	<item>
-		<petGroups>"petGroups": ["KoolPet Type:", "Rodents"],</petGroups>
-		<petName>"petName": ["KoolPet\'s Name:", "Chrome"],</petName>
-		<genVal>"genVal": ["Gender:", "Female"],</genVal>
-		<favePet>"favePet": ["Favorite KoolPet:", "No"],</favePet>
-		<koolness>"koolness": ["Koolness Factor:", "60"],</koolness>
-		<comments>"comments": ["Comments:", "Mouse Sister to Ginger."]</comments>
+		<petGroups>"Rodents"</petGroups>
+		<petName>"Chrome"</petName>
+		<genVal>"Female"</genVal>
+		<favePet>"No"</favePet>
+		<koolness>"60"</koolness>
+		<comments>"Mouse Sister to Ginger."</comments>
 	</item>
 	<item>
-		<petGroups>"petGroups": ["KoolPet Type:", "Rodents"],</petGroups>
-		<petName>"petName": ["KoolPet\'s Name:", "Carmella"],</petName>
-		<genVal>"genVal": ["Gender:", "Female"],</genVal>
-		<favePet>"favePet": ["Favorite KoolPet:", "No"],</favePet>
-		<koolness>"koolness": ["Koolness Factor:", "60"],</koolness>
-		<comments>"comments": ["Comments:", "Mouse sister to Ginger."]</comments>
+		<petGroups>"Rodents"</petGroups>
+		<petName>"Carmella"</petName>
+		<genVal>"Female"</genVal>
+		<favePet>"No"</favePet>
+		<koolness>"60"</koolness>
+		<comments>"Mouse sister to Ginger."</comments>
 	</item>
 	<item>
-		<petGroups>"petGroups": ["KoolPet Type:", "Rodents"],</petGroups>
-		<petName>"petName": ["KoolPet\'s Name:", "Ginger"],</petName>
-		<genVal>"genVal": ["Gender:", "Female"],</genVal>
-		<favePet>"favePet": ["Favorite KoolPet:", "No"],</favePet>
-		<koolness>"koolness": ["Koolness Factor:", "60"],</koolness>
-		<comments>"comments": ["Comments:", "She had a litter of 11 mouse babies."]</comments>
+		<petGroups>"Rodents"</petGroups>
+		<petName>"Ginger"</petName>
+		<genVal>"Female"</genVal>
+		<favePet>"No"</favePet>
+		<koolness>"60"</koolness>
+		<comments>"She had a litter of 11 mouse babies."</comments>
 	</item>
 	<item>
-		<petGroups>"petGroups": ["KoolPet Type:", "Reptiles"],</petGroups>
-		<petName>"petName": ["KoolPet\'s Name:", "Repty"],</petName>
-		<genVal>"genVal": ["Gender:", "Male"],</genVal>
-		<favePet>"favePet": ["Favorite KoolPet:", "No"],</favePet>
-		<koolness>"koolness": ["Koolness Factor:", "20"],</koolness>
-		<comments>"comments": ["Comments:", "Good Snake, don't bite me."]</comments>
+		<petGroups>"Reptiles"</petGroups>
+		<petName>"Repty"</petName>
+		<genVal>"Male"</genVal>
+		<favePet>"No"</favePet>
+		<koolness>"20"</koolness>
+		<comments>"Good Snake, don't bite me."</comments>
 	</item>
 	<item>
-		<petGroups>"petGroups": ["KoolPet Type:", "Mythical"],</petGroups>
-		<petName>"petName": ["KoolPet\'s Name:", "Tiny"],</petName>
-		<genVal>"genVal": ["Gender:", "Male"],</genVal>
-		<favePet>"favePet": ["Favorite KoolPet:", "No"],</favePet>
-		<koolness>"koolness": ["Koolness Factor:", "80"],</koolness>
-		<comments>"comments": ["Comments:", "Hippos are fun."]</comments>
+		<petGroups>"Mythical"</petGroups>
+		<petName>"Tiny"</petName>
+		<genVal>"Male"</genVal>
+		<favePet>"No"</favePet>
+		<koolness>"80"</koolness>
+		<comments>"Hippos are fun."</comments>
 	</item>
 </data>
