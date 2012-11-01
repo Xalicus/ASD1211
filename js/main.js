@@ -310,16 +310,16 @@ $.ajax({
 	"success"		: function(data, value) {
 		$('#petList').empty();
 		
-		var showJ = function(value) {
-			$.each(function(value) {
+		var showJ = function(data) {
+			$.each(function(data) {
 				$('<div class="jpets">' +
 					getImg(object.petGroups[1]) +
-					'<li>' + value.petName + '</li>' +
-					'<li>' + value.petGroups + '</li>' +
-					'<li>' + value.genVal + '</li>' +
-					'<li>' + value.favePet + '</li>' +
-					'<li>' + value.koolnes + '</li>' +
-					'<li>' + value.comments + '</li>' +
+					'<li>' + data.petName + '</li>' +
+					'<li>' + data.petGroups + '</li>' +
+					'<li>' + data.genVal + '</li>' +
+					'<li>' + data.favePet + '</li>' +
+					'<li>' + data.koolnes + '</li>' +
+					'<li>' + data.comments + '</li>' +
 					'</div>'
 				).appendTo("#petList");
 			});
@@ -479,8 +479,8 @@ var getImg = function(catName, makeSubList) {
 	showJSON.on('click', showJ);
 	var showXML = $("#sX");
 	showXML.on('click', showX);
-	var showCSV = $("#sC");
-	showCSV.on('click', showC);
+	/*var showCSV = $("#sC");
+	showCSV.on('click', showC);*/
 
 
 }); // End code for page.
