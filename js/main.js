@@ -320,22 +320,20 @@ $("#filter").keyup(function(){
 
 // AJAX function to call the JSON data.
 $.ajax({
-	"url"			: 'xhr/data.json',
-	"type"			: 'GET',
-	"dataType"		: 'json',
-	"success"		: function(data) {
-		$('#petList').empty();
-		
+	url			: 'xhr/data.json',
+	type		: 'GET',
+	dataType	: 'json',
+	success		: function(data) {
+		console.log(data);
 		var showJ = function(data) {
 			$.each(function(data) {
 				$('' +
-					getImg(object.petGroups[1]) +
-					'<li>' + data.petName + '</li>' +
-					'<li>' + data.petGroups + '</li>' +
-					'<li>' + data.genVal + '</li>' +
-					'<li>' + data.favePet + '</li>' +
-					'<li>' + data.koolnes + '</li>' +
-					'<li>' + data.comments + '</li>'
+					'<li><p> KoolPet Name: ' + data.petName + '</p>' +
+					'<p> KoolPet Group: ' + data.petGroups + '</p>' +
+					'<p> KoolPet Gender: ' + data.genVal + '</p>' +
+					'<p> Favorite KoolPet: ' + data.favePet + '</p>' +
+					'<p> Koolness Factor: ' + data.koolnes + '</p>' +
+					'<p> Comments: ' + data.comments + '</p></li>'
 				).appendTo("#petList");
 			});
 		};
@@ -354,6 +352,7 @@ $.ajax({
 				'</div>'
 			).appendTo('#items');
 		};*/
+		$('#petList').empty();
 		var showJSONData = $("#sJ");
 		showJSONData.on('click', showJ);
 		console.log(data.petName);
@@ -369,12 +368,10 @@ $.ajax({
 
 // AJAX function to call the XML data.
 $.ajax({
-	"url"			: 'xhr/data.xml',
-	"type"			: 'GET',
-	"dataType"	 	: 'xml',
-	"success"		: function(data) {
-		$('#petList').empty();
-		
+	url			: 'xhr/data.xml',
+	type		: 'GET',
+	dataType 	: 'xml',
+	success		: function(data) {
 		var dataA = $.parseXML(data);
 		var items = $( dataA );
 		items.find('item').each(function(){
@@ -390,6 +387,8 @@ $.ajax({
 			).appendTo('#petList');
 			console.log("Name: ", item.find("petName"));
 		});
+		
+		$('#petList').empty();
 		var showXML = $("#sX");
 		showXML.on('click', showXML);
 		
@@ -422,12 +421,10 @@ $.ajax({
 
 // AJAX function to call the CSV data.
 $.ajax({
-	"url"			: 'xhr/data.csv',
-	"type"			: 'GET',
-	"dataType"		: 'text',
-	"success"		: function(data) {
-		$('#petList').empty();
-		
+	url			: 'xhr/data.csv',
+	type		: 'GET',
+	dataType	: 'text',
+	success		: function(data) {
 		var showC = function(data) {
 
 			// Assume that your entire CSV file is in the data variable.
@@ -455,6 +452,7 @@ $.ajax({
 			});
 		}; // End showC Function
 		
+		$('#petList').empty();
 		var showCSV = $("#sC");
 		showCSV.on('click', showC);
 		
