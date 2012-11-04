@@ -318,16 +318,23 @@ $("#filter").keyup(function(){
 
 }; // end search function
 
+var showJSONData = $("#sJ");
+showJSONData.on('click', showJ);
+
 // AJAX function to call the JSON data.
+var showJ = function() {
 $.ajax({
-	url			: 'xhr/data.json',
-	type		: 'GET',
-	dataType	: 'json',
-	success		: function(data) {
-		console.log(data);
+	"url"			: 'xhr/data.json',
+	"type"			: 'GET',
+	"dataType"		: 'json',
+	success			: function(data) {
+		$('#petList').empty();
+		
 		var showJ = function(data) {
+		console.log("ShowJ");
 			$.each(function(data) {
 				$('' +
+					getImg(object.petGroups[1]) +
 					'<li><p> KoolPet Name: ' + data.petName + '</p>' +
 					'<p> KoolPet Group: ' + data.petGroups + '</p>' +
 					'<p> KoolPet Gender: ' + data.genVal + '</p>' +
@@ -336,7 +343,7 @@ $.ajax({
 					'<p> Comments: ' + data.comments + '</p></li>'
 				).appendTo("#petList");
 			});
-		};
+
 		
 		/*for(var i=0, j=data.pets.length; i<j; i++){
 			var pet = data.pets[i];
@@ -352,22 +359,21 @@ $.ajax({
 				'</div>'
 			).appendTo('#items');
 		};*/
-		$('#petList').empty();
-		var showJSONData = $("#sJ");
-		showJSONData.on('click', showJ);
-		console.log(data.petName);
+		
 		$.mobile.changePage("#showItem");
 		$('#petList').listview('refresh');
+		};
 	},
 	error: function(data) {
 		console.log(data);
 		console.log("Show JSON broke!");
 	}
-});
+})
+};
 // end showjson function
 
 // AJAX function to call the XML data.
-$.ajax({
+/*$.ajax({
 	url			: 'xhr/data.xml',
 	type		: 'GET',
 	dataType 	: 'xml',
@@ -391,7 +397,7 @@ $.ajax({
 		$('#petList').empty();
 		var showXML = $("#sX");
 		showXML.on('click', showXML);
-		
+*/		
 		/*for(var i=0, j=pets.pet.length; i<j; i++){
 			var pet = pets.pet[i];
 			$(''+
@@ -408,7 +414,7 @@ $.ajax({
 		};*/
 		
 		//console.log(pets.pet);
-		$.mobile.changePage("#showItem");
+/*		$.mobile.changePage("#showItem");
 		$('#petList').listview('refresh');
 	},
 	error: function(data) {
@@ -416,11 +422,11 @@ $.ajax({
 		console.log("Show XML Broke!");
 	}
 	
-});
+});*/
 // end showxml function
 
 // AJAX function to call the CSV data.
-$.ajax({
+/*$.ajax({
 	url			: 'xhr/data.csv',
 	type		: 'GET',
 	dataType	: 'text',
@@ -468,7 +474,7 @@ $.ajax({
 		console.log("Show CSV Broke!");
 	}
 	
-});
+});*/
 // end showcsv function
 
 // This is to get images for the correct category.
