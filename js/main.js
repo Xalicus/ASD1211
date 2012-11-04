@@ -318,27 +318,32 @@ $("#filter").keyup(function(){
 
 }; // end search function
 
+var showJSONData = $("#sJ");
+showJSONData.on('click', showJ);
+
 // AJAX function to call the JSON data.
+var showJ = function() {
 $.ajax({
 	"url"			: 'xhr/data.json',
 	"type"			: 'GET',
 	"dataType"		: 'json',
-	"success"		: function(data) {
+	success			: function(data) {
 		$('#petList').empty();
 		
 		var showJ = function(data) {
+		console.log("ShowJ");
 			$.each(function(data) {
 				$('' +
 					getImg(object.petGroups[1]) +
-					'<li>' + data.petName + '</li>' +
-					'<li>' + data.petGroups + '</li>' +
-					'<li>' + data.genVal + '</li>' +
-					'<li>' + data.favePet + '</li>' +
-					'<li>' + data.koolnes + '</li>' +
-					'<li>' + data.comments + '</li>'
+					'<li><p> KoolPet Name: ' + data.petName + '</p>' +
+					'<p> KoolPet Group: ' + data.petGroups + '</p>' +
+					'<p> KoolPet Gender: ' + data.genVal + '</p>' +
+					'<p> Favorite KoolPet: ' + data.favePet + '</p>' +
+					'<p> Koolness Factor: ' + data.koolnes + '</p>' +
+					'<p> Comments: ' + data.comments + '</p></li>'
 				).appendTo("#petList");
 			});
-		};
+
 		
 		/*for(var i=0, j=data.pets.length; i<j; i++){
 			var pet = data.pets[i];
@@ -354,27 +359,25 @@ $.ajax({
 				'</div>'
 			).appendTo('#items');
 		};*/
-		var showJSONData = $("#sJ");
-		showJSONData.on('click', showJ);
-		console.log(data.petName);
+		
 		$.mobile.changePage("#showItem");
 		$('#petList').listview('refresh');
+		};
 	},
 	error: function(data) {
 		console.log(data);
 		console.log("Show JSON broke!");
 	}
-});
+})
+};
 // end showjson function
 
 // AJAX function to call the XML data.
-$.ajax({
-	"url"			: 'xhr/data.xml',
-	"type"			: 'GET',
-	"dataType"	 	: 'xml',
-	"success"		: function(data) {
-		$('#petList').empty();
-		
+/*$.ajax({
+	url			: 'xhr/data.xml',
+	type		: 'GET',
+	dataType 	: 'xml',
+	success		: function(data) {
 		var dataA = $.parseXML(data);
 		var items = $( dataA );
 		items.find('item').each(function(){
@@ -390,9 +393,11 @@ $.ajax({
 			).appendTo('#petList');
 			console.log("Name: ", item.find("petName"));
 		});
+		
+		$('#petList').empty();
 		var showXML = $("#sX");
 		showXML.on('click', showXML);
-		
+*/		
 		/*for(var i=0, j=pets.pet.length; i<j; i++){
 			var pet = pets.pet[i];
 			$(''+
@@ -409,7 +414,7 @@ $.ajax({
 		};*/
 		
 		//console.log(pets.pet);
-		$.mobile.changePage("#showItem");
+/*		$.mobile.changePage("#showItem");
 		$('#petList').listview('refresh');
 	},
 	error: function(data) {
@@ -417,17 +422,15 @@ $.ajax({
 		console.log("Show XML Broke!");
 	}
 	
-});
+});*/
 // end showxml function
 
 // AJAX function to call the CSV data.
-$.ajax({
-	"url"			: 'xhr/data.csv',
-	"type"			: 'GET',
-	"dataType"		: 'text',
-	"success"		: function(data) {
-		$('#petList').empty();
-		
+/*$.ajax({
+	url			: 'xhr/data.csv',
+	type		: 'GET',
+	dataType	: 'text',
+	success		: function(data) {
 		var showC = function(data) {
 
 			// Assume that your entire CSV file is in the data variable.
@@ -455,6 +458,7 @@ $.ajax({
 			});
 		}; // End showC Function
 		
+		$('#petList').empty();
 		var showCSV = $("#sC");
 		showCSV.on('click', showC);
 		
@@ -470,7 +474,7 @@ $.ajax({
 		console.log("Show CSV Broke!");
 	}
 	
-});
+});*/
 // end showcsv function
 
 // This is to get images for the correct category.
