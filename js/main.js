@@ -318,8 +318,12 @@ $("#filter").keyup(function(){
 
 }; // end search function
 
-var showJSONData = $("#sJ");
-showJSONData.on('click', showJ);
+var showJSON = $("#sJ");
+showJSON.on('click', showJ);
+var showXML = $("#sX");
+showXML.on('click', showX);
+var showCSV = $("#sC");
+showCSV.on('click', showC);
 
 // AJAX function to call the JSON data.
 function showJ() {
@@ -375,31 +379,29 @@ $.ajax({
 // end showjson function
 
 // AJAX function to call the XML data.
-/*$.ajax({
-	url			: 'xhr/data.xml',
-	type		: 'GET',
-	dataType 	: 'xml',
-	success		: function(data) {
+function showX() {
+$.ajax({
+	"url"			: 'xhr/data.xml',
+	"type"			: 'GET',
+	"dataType"	 	: 'xml',
+	success			: function(data) {
+		$('#petList').empty();
 		var dataA = $.parseXML(data);
 		var items = $( dataA );
 		items.find('item').each(function(){
 			var item = $(this);
 			$('' +
 				getImg(object.petGroups[1], makeSubList) +
-				'<li>' + item.petName + '</li>' +
-				'<li>' + item.petGroups + '</li>' +
-				'<li>' + item.genVal + '</li>' +
-				'<li>' + item.favePet + '</li>' +
-				'<li>' + item.koolness + '</li>' +
-				'<li>' + item.comments + '</li>'
+				'<li><p> KoolPet Name: ' + item.petName + '</p>' +
+				'<p> KoolPet Group: ' + item.petGroups + '</p>' +
+				'<p> KoolPet Gender: ' + item.genVal + '</p>' +
+				'<p> Favorite KoolPet: ' + item.favePet + '</p>' +
+				'<p> Koolness Factor: ' + item.koolness + '</p>' +
+				'<p> Comments: ' + item.comments + '</p></li>'
 			).appendTo('#petList');
 			console.log("Name: ", item.find("petName"));
 		});
-		
-		$('#petList').empty();
-		var showXML = $("#sX");
-		showXML.on('click', showXML);
-*/		
+	
 		/*for(var i=0, j=pets.pet.length; i<j; i++){
 			var pet = pets.pet[i];
 			$(''+
@@ -416,7 +418,7 @@ $.ajax({
 		};*/
 		
 		//console.log(pets.pet);
-/*		$.mobile.changePage("#showItem");
+		$.mobile.changePage("#showItem");
 		$('#petList').listview('refresh');
 	},
 	error: function(data) {
@@ -424,17 +426,19 @@ $.ajax({
 		console.log("Show XML Broke!");
 	}
 	
-});*/
+})
+};
 // end showxml function
 
 // AJAX function to call the CSV data.
-/*$.ajax({
+function showC() {
+$.ajax({
 	url			: 'xhr/data.csv',
 	type		: 'GET',
 	dataType	: 'text',
 	success		: function(data) {
-		var showC = function(data) {
-
+		$('#petList').empty();
+			
 			// Assume that your entire CSV file is in the data variable.
 			// The "\n" is the string escape for the end-of-line character.
 			var lines = data.split("\n");
@@ -445,29 +449,25 @@ $.ajax({
 				// The columns variable is now an array.
 				return (columns);
 				console.log(columns);
+				return columns;
 			} // for lineNum
 			
 			$.each(function(columns) {
 				$('' +
 					getImg(object.petGroups[1]) +
-					'<li>' + columns.petName + '</li>' +
-					'<li>' + columns.petGroups + '</li>' +
-					'<li>' + columns.genVal + '</li>' +
-					'<li>' + columns.favePet + '</li>' +
-					'<li>' + columns.koolnes + '</li>' +
-					'<li>' + columns.comments + '</li>'
+					'<li><p> KoolPet Name: ' + columns.petName + '</p>' +
+					'<p> KoolPet Group: ' + columns.petGroups + '</p>' +
+					'<p> KoolPet Gender: ' + columns.genVal + '</p>' +
+					'<p> Favorite KoolPet: ' + columns.favePet + '</p>' +
+					'<p> Koolness Factor: ' + columns.koolnes + '</p>' +
+					'<p> Comments: ' + columns.comments + '</p></li>'
 				).appendTo("#petList");
 			});
-		}; // End showC Function
-		
-		$('#petList').empty();
-		var showCSV = $("#sC");
-		showCSV.on('click', showC);
-		
+
 		// $.csv.toArrays(csv, options, callback);
 		// console.log(csv, options, callback);
 		
-		console.log(data);
+		console.log(columns);
 		$.mobile.changePage("#showItem");
 		$('#petList').listview('refresh');
 	},
@@ -476,7 +476,8 @@ $.ajax({
 		console.log("Show CSV Broke!");
 	}
 	
-});*/
+})
+};
 // end showcsv function
 
 // This is to get images for the correct category.
