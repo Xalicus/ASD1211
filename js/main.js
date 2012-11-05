@@ -376,7 +376,7 @@ $.ajax({
 	}
 })
 };
-// end showjson function
+// end showJ function
 
 // AJAX function to call the XML data.
 function showX() {
@@ -428,7 +428,7 @@ $.ajax({
 	
 })
 };
-// end showxml function
+// end showX function
 
 // AJAX function to call the CSV data.
 function showC() {
@@ -478,7 +478,7 @@ $.ajax({
 	
 })
 };
-// end showcsv function
+// end showC function
 
 // This is to get images for the correct category.
 var getImg = function(catName, makeSubList) {
