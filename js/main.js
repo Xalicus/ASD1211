@@ -322,7 +322,7 @@ var showJSONData = $("#sJ");
 showJSONData.on('click', showJ);
 
 // AJAX function to call the JSON data.
-var showJ = function() {
+function showJ() {
 $.ajax({
 	"url"			: 'xhr/data.json',
 	"type"			: 'GET',
@@ -330,21 +330,22 @@ $.ajax({
 	success			: function(data) {
 		$('#petList').empty();
 		
-		var showJ = function(data) {
-		console.log("ShowJ");
+		//var showJ = function(data) {
+		console.log("ShowJ sorta works.");
 			$.each(function(data) {
+			var pet = data.pets[i];
 				$('' +
 					getImg(object.petGroups[1]) +
-					'<li><p> KoolPet Name: ' + data.petName + '</p>' +
-					'<p> KoolPet Group: ' + data.petGroups + '</p>' +
-					'<p> KoolPet Gender: ' + data.genVal + '</p>' +
-					'<p> Favorite KoolPet: ' + data.favePet + '</p>' +
-					'<p> Koolness Factor: ' + data.koolnes + '</p>' +
-					'<p> Comments: ' + data.comments + '</p></li>'
+					'<li><p> KoolPet Name: ' + pet.petName + '</p>' +
+					'<p> KoolPet Group: ' + pet.petGroups + '</p>' +
+					'<p> KoolPet Gender: ' + pet.genVal + '</p>' +
+					'<p> Favorite KoolPet: ' + pet.favePet + '</p>' +
+					'<p> Koolness Factor: ' + pet.koolnes + '</p>' +
+					'<p> Comments: ' + pet.comments + '</p></li>'
 				).appendTo("#petList");
 			});
 
-		
+		console.log(data.pets);
 		/*for(var i=0, j=data.pets.length; i<j; i++){
 			var pet = data.pets[i];
 			$('' +
@@ -362,7 +363,7 @@ $.ajax({
 		
 		$.mobile.changePage("#showItem");
 		$('#petList').listview('refresh');
-		};
+		//};
 	},
 	error: function(data) {
 		console.log(data);
