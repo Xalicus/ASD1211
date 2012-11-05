@@ -343,6 +343,7 @@ $.ajax({
 					'<p> Koolness Factor: ' + pet.koolnes + '</p>' +
 					'<p> Comments: ' + pet.comments + '</p></li>'
 				).appendTo("#petList");
+				console.log(pet);
 			});
 
 		console.log(data.pets);
