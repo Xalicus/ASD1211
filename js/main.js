@@ -334,9 +334,8 @@ $.ajax({
 	success			: function(data) {
 		$('#petList').empty();
 		
-		//var showJ = function(data) {
 		console.log("ShowJ sorta works.");
-			$.each(function(data) {
+/*			$.each(function(data) {
 			var pet = data.pets[i];
 				$('' +
 					getImg(object.petGroups[1]) +
@@ -348,25 +347,25 @@ $.ajax({
 					'<p> Comments: ' + pet.comments + '</p></li>'
 				).appendTo("#petList");
 				console.log(pet);
-			});
+			});*/
 
-		console.log(data.pets);
-		/*for(var i=0, j=data.pets.length; i<j; i++){
+		for(var i=0, j=data.pets.length; i<j; i++){
 			var pet = data.pets[i];
 			$('' +
-				'<div class="jpets">' +
-					getImg(object.petGroups[1]) +
+				'<li class="jpets">' +
+					//getImg(object.petGroups[1]) +
 					'<h2>'+ pet.petName +'</h2>' +
 					'<p>'+ pet.petGroups +'</p>' +
 					'<p>'+ pet.genVal +'</p>' +
 					'<p>'+ pet.favePet +'</p>' +
 					'<p>'+ pet.koolness +'</p>' +
 					'<p>'+ pet.comments +'</p>' +
-				'</div>'
-			).appendTo('#items');
-		};*/
+				'</li>'
+			).appendTo('#petList');
+		};
 		
-		$.mobile.changePage("#showItem");
+		console.log(data.pets);
+		//$.mobile.changePage("#showItem");
 		$('#petList').listview('refresh');
 		//};
 	},
@@ -376,7 +375,7 @@ $.ajax({
 	}
 })
 };
-// end showjson function
+// end showJ function
 
 // AJAX function to call the XML data.
 function showX() {
@@ -428,7 +427,7 @@ $.ajax({
 	
 })
 };
-// end showxml function
+// end showX function
 
 // AJAX function to call the CSV data.
 function showC() {
@@ -478,7 +477,7 @@ $.ajax({
 	
 })
 };
-// end showcsv function
+// end showC function
 
 // This is to get images for the correct category.
 var getImg = function(catName, makeSubList) {
