@@ -14,7 +14,41 @@ $('#home').on("pageshow", function(){
 
 
 $('#addItem').on("pageshow", function(){
-
+	
+	/*$.couch.db("asd1210").saveDoc("petsdex/pets", {
+	    success: function(data) {
+	        console.log(data);
+	        $.each(data.rows, function(index, pet) {
+	        	var petValue = (pet.value || pet.doc);
+	        	
+	        });
+	        $('#petForm').form('refresh');
+	    },
+	    error: function(status) {
+	        console.log(status);
+	        
+	    }
+	});
+	
+	$.couch.db("asd1210").view("petsdex/pets", {
+		success: function(data) {
+			console.log(data);
+			$('#petList').empty();
+			$.each(data.rows, function(index, pet) {
+				var item = (pet.value || pet.doc);
+				$('#petList').append(
+					$('<li>').append(
+						$('<a>')
+							.attr("href", "pets.html?program=" + item.koolPet_Groups)
+							.text(item.koolPet_Name + " in " + item.koolPet_Groups)
+					)
+				);
+			});
+			$('#petList').listview('refresh');
+		}
+	});*/
+	
+	// This line of code is supposed to console log every div I click on in the add item page.
 	$('#petsForm div').on('click', function(e){
 		console.log(e);
 	});
@@ -52,21 +86,6 @@ $('#addItem').on("pageshow", function(){
 					storeData(key);
 			}
 			
-			/*$('#reset').on('click', function() {
-				var resetPF = function() {
-					$('#petName').val("");
-					$('#petGroups').val("");
-					$('#male').attr('checked', true);
-					$('#female').attr('checked', false);
-					$('#favePet').attr('checked', false);
-					$('#koolness').val(25);
-					$('#comments').val("");
-				};
-				
-				// this is to reset the form
-				resetPF();
-				location.reload('#addItem');
-			});*/
 		});
 
 	//any other code needed for addItem page goes here
@@ -80,7 +99,7 @@ $('#addItem').on("pageshow", function(){
 
 
 // My storeData function
-var storeData = function(key){
+/*var storeData = function(key){
 	// If there isn't a key, this means this is a brand new item and we need a new key.
 	if (!key) {
 		var id				= Math.floor(Math.random()*10000001);
@@ -105,16 +124,16 @@ var storeData = function(key){
 	localStorage.setItem(id, JSON.stringify(item));
 	console.log(key.val());
 	alert("Pet saved to the KoolPetsDex!");
-}; 
+}; */
 	
 // This is to get images for the correct category.
-	var getImg = function(catName, makeSubList) {
+/*	var getImg = function(catName, makeSubList) {
 		var imgLi = $('<li>');
 		makeSubList.append(imgLi);
 		var newImg = $('<img>');
 		var setSrc = newImg.attr("src", "images/" + catName + ".png");
 		imgLi.append(newImg);
-	};
+	}; */
 
 // My Make Item Links Function
 	// Create the edit and delete links for each stored item when displayed.
@@ -320,13 +339,35 @@ $("#filter").keyup(function(){
 
 var showJSON = $("#sJ");
 showJSON.on('click', showJ);
-var showXML = $("#sX");
-showXML.on('click', showX);
-var showCSV = $("#sC");
-showCSV.on('click', showC);
+//var showXML = $("#sX");
+//showXML.on('click', showX);
+//var showCSV = $("#sC");
+//showCSV.on('click', showC);
+
 
 // AJAX function to call the JSON data.
 function showJ() {
+
+	$.couch.db("asd1211").view("koolpetsdex/pets", {
+		success: function(data) {
+			console.log(data);
+			$('#petList').empty();
+			$.each(data.rows, function(index, pet) {
+				var item = (pet.value || pet.doc);
+				$('#petList').append(
+					$('<li>').append(
+						$('<a>')
+							.attr("href", "pets.html?program=" + item.koolPet_Groups)
+							.text("Name: " + item.koolPet_Name + " in " + "Group: " + item.koolPet_Groups)
+					)
+					//console.log(koolPet_Name + koolPet_Groups + gender + favorite_KoolPet + koolness + comments);
+				);
+			});
+			$('#petList').listview('refresh');
+		}
+	})
+
+/*
 $.ajax({
 	"url"			: 'xhr/data.json',
 	"type"			: 'GET',
@@ -334,7 +375,7 @@ $.ajax({
 	success			: function(data) {
 		$('#petList').empty();
 		
-		console.log("ShowJ sorta works.");
+		console.log("ShowJ sorta works.");*/
 /*			$.each(function(data) {
 			var pet = data.pets[i];
 				$('' +
@@ -348,7 +389,7 @@ $.ajax({
 				).appendTo("#petList");
 				console.log(pet);
 			});*/
-
+/*
 		for(var i=0, j=data.pets.length; i<j; i++){
 			var pet = data.pets[i];
 			$('' +
@@ -373,12 +414,12 @@ $.ajax({
 		console.log(data);
 		console.log("Show JSON broke!");
 	}
-})
+})*/
 };
 // end showJ function
 
 // AJAX function to call the XML data.
-function showX() {
+/*function showX() {
 $.ajax({
 	"url"			: 'xhr/data.xml',
 	"type"			: 'GET',
@@ -399,7 +440,7 @@ $.ajax({
 				'<p> Comments: ' + item.comments + '</p></li>'
 			).appendTo('#petList');
 			console.log("Name: ", item.find("petName"));
-		});
+		});*/
 	
 		/*for(var i=0, j=pets.pet.length; i<j; i++){
 			var pet = pets.pet[i];
@@ -417,7 +458,7 @@ $.ajax({
 		};*/
 		
 		//console.log(pets.pet);
-		$.mobile.changePage("#showItem");
+		/*$.mobile.changePage("#showItem");
 		$('#petList').listview('refresh');
 	},
 	error: function(data) {
@@ -426,11 +467,11 @@ $.ajax({
 	}
 	
 })
-};
+};*/
 // end showX function
 
 // AJAX function to call the CSV data.
-function showC() {
+/*function showC() {
 $.ajax({
 	url			: 'xhr/data.csv',
 	type		: 'GET',
@@ -476,7 +517,7 @@ $.ajax({
 	}
 	
 })
-};
+};*/
 // end showC function
 
 // This is to get images for the correct category.
@@ -484,7 +525,7 @@ var getImg = function(catName, makeSubList) {
 	var imgLi = $('<li>');
 	makeSubList.append(imgLi);
 	var newImg = $('<img>');
-	var setSrc = newImg.attr("src", "images/" + catName + ".png");
+	var setSrc = newImg.attr("src", "" + catName + ".png");
 	imgLi.append(newImg);
 };
 

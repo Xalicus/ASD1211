@@ -1,0 +1,60 @@
+<!doctype html>
+<!--
+Author: Kevin Ward
+Class: ASD1211
+-->
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Kev's KoolPetsDex</title>
+</head>
+<body>
+	<!-- Pets Home Page -->
+	<div data-role="page" id="showPets" data-add-back-btn="true" data-theme="b">
+		<header data-role="header" data-theme="b">
+			<nav id="addPetFeature">
+				<h2><a href="index.html#home"><img src="img.png" width="40" height="50" title="My Joker Face." /></a>
+				KoolPetsDex Rocks!</h2>
+			</nav>
+		</header> <!-- end header -->
+		<!-- Main body of page -->
+		<div data-role="content" id="petsearchbrowse" data-theme="b">
+		
+			<div id="browsePets">
+				<a href="index.html#showItem" id="showPet" data-role="button" data-icon="arrow-r" data-iconpos="right" data-mini="true">Show KoolPets</a>
+			</div>
+		</div> <!-- end content -->
+		
+		<div data-role="content" id="petsForm" data-theme="b">
+			<!-- This is where the list of pets will appear. -->
+			<div id="divitems" class="itemlist" data-theme="b">
+				
+				<br />
+				<ul id="petList" data-role="listview" data-theme="b">
+				</ul>
+				<br />
+			
+			</div> <!-- end items -->
+			
+		</div> <!-- end content -->
+
+		<footer data-role="footer" data-position="fixed" data-theme="b" data-id="navfooter">
+			<nav id="navi">
+			<div data-role="navbar" data-theme="b">
+				<ul>
+					<li><a href="index.html#home" data-role="button" data-ajax="false">Home</a></li>
+					<li><a href="index.html#addItem" data-role="button" data-ajax="false" class="ui-btn-active ui-state-persist">Add Pet</a></li>
+					<li><a href="index.html#info" data-role="button" data-ajax="false">About Me</a></li>
+					<li><a href="index.html#news" data-role="button" data-ajax="false">News</a></li>
+				</ul>
+			</div><!-- /navbar -->
+			<small>&copy; 2012 Kevin Ward, All Rights Reserved.</small>
+			</nav>
+		</footer> <!-- end footer -->
+		
+	</div>
+	<!-- End Home Page -->
+	
+</body>
+</html>
