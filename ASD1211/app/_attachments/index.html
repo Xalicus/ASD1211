@@ -1,29 +1,515 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>My New CouchApp</title>
-    <link rel="stylesheet" href="style/main.css" type="text/css">
-  </head>
-  <body>
-    <div id="account"></div>
+<!doctype html>
+<!--
+Author: Kevin Ward
+Class: ASD1211
+-->
 
-    <h1>Generated CouchApp</h1>
+<html lang="en">
+<head>
 
-    <div id="profile"></div>
-    <div id="items"></div>
+	<meta charset="utf-8">
+	<meta name="description" content="Kev's KoolPetsDex Mobile Web App." />
+	<meta name="keywords" content="html5, mobile development, Full Sail University, pets, apps" />
+		
+	<title>Kev's KoolPetsDex</title>
+	
+	<!--  Mobile viewport optimized: j.mp/bplateviewport -->
+	<meta name="HandheldFriendly" content="True">
+	<meta name="MobileOptimized" content="320"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<!-- Mobile IE needs ClearType for smoothing fonts -->
+	<meta http-equiv="cleartype" content="on">
+	
+	<!-- StyleSheets under here -->
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" />
+	<link rel="stylesheet" type="text/css" href="main.css" />
+	
+	<!-- JavaScript is normally at the end of the body, except for Modernizr which enables HTML5 elements & feature detects -->
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.js"></script>
+	<script type="text/javascript" src="jquery.validate.min.js"></script>
+	<script type="text/javascript" src="modernizr.custom.min.js"></script>
+	<script type="text/javascript" src="jquery.couch.js"></script>
 
-    <div id="sidebar">
-      <p>Edit welcome message.</p>
-      <p>Ideas: You could easily turn this into a photo sharing app, or a grocery list, or a chat room.</p>
-    </div>
-  </body>
-  <script src="vendor/couchapp/loader.js"></script>
-  <script type="text/javascript" charset="utf-8">
-    $.couch.app(function(app) {
-      $("#account").evently("account", app);
-      $("#profile").evently("profile", app);
-      $.evently.connect("#account","#profile", ["loggedIn","loggedOut"]);
-      $("#items").evently("items", app);
-    });
-  </script>
+</head>
+<body>
+	<!-- Home Page -->
+	<div data-role="page" id="home" data-theme="b">
+	<!-- Header -->
+		<header data-role="header" data-theme="b">
+			<nav id="addPetFeature">
+				<h1><a href="#home"><img src="images/img.png" width="40" height="50" title="My Joker Face." /></a>
+				Kev's KoolPetsDex</h1>
+				<p>Click here to add more KoolPets!</p>
+				<p><a href="#addItem" id="addPet" data-role="button" data-icon="arrow-r" data-iconpos="right" data-mini="true">ADD A KOOLPET NOW!</a></p>
+			</nav>
+		</header>
+		<!-- Main body of page -->
+		<div data-role="content" id="petsearchbrowse" data-theme="b">
+			<nav id="showLoseAdd">
+				<a href="#showItem" id="showData" data-role="button" data-mini="true" data-inline="true" data-ajax="false" rel="external">GoTo Ajax KoolPets Page</a> 
+			</nav>
+			<div id="browsePets">
+				<h3>Browse Kev's KoolPetsDex</h3>
+				<div data-role="collapsible-set">
+					<div data-role="collapsible" data-collapsed="true">
+						<h4>Birds</h4>
+						<a href="#cs" id="Birds" data-role="button" data-icon="arrow-r" data-iconpos="right" data-mini="true">
+						<img src="images/Birds.png" /> Browse Birds</a>
+						<p>Flying creatures of all types.</p>
+					</div>
+					<div data-role="collapsible" data-collapsed="true">
+						<h4>Cats</h4>
+						<a href="#cs" id="Cats" data-role="button" data-icon="arrow-r" data-iconpos="right" data-mini="true">
+						<img src="images/Cats.png" /> Browse Cats</a>
+						<p>Felines big and small.</p>
+					</div>
+					<div data-role="collapsible" data-collapsed="true">
+						<h4>Dogs</h4>
+						<a href="#cs" id="Dogs" data-role="button" data-icon="arrow-r" data-iconpos="right" data-mini="true">
+						<img src="images/Dogs.png" /> Browse Dogs</a>
+						<p>Canines up the Whazoo.</p>
+					</div>
+					<div data-role="collapsible" data-collapsed="true">
+						<h4>Farm Animals</h4>
+						<a href="#cs" id="Farm_Animals" data-role="button" data-icon="arrow-r" data-iconpos="right" data-mini="true">
+						<img src="images/Farm_Animals.png" /> Browse Farm Animals</a>
+						<p>Animals you would find on a farm.</p>
+					</div>
+					<div data-role="collapsible" data-collapsed="true">
+						<h4>Mythical</h4>
+						<a href="#cs" id="Mythical" data-role="button" data-icon="arrow-r" data-iconpos="right" data-mini="true">
+						<img src="images/Mythical.png" /> Browse Mythical</a>
+						<p>Dragons to Unicorns, we got 'em!</p>
+					</div>
+					<div data-role="collapsible" data-collapsed="true">
+						<h4>Reptiles</h4>
+						<a href="#cs" id="Reptiles" data-role="button" data-icon="arrow-r" data-iconpos="right" data-mini="true">
+						<img src="images/Reptiles.png" /> Browse Reptiles</a>
+						<p>Snakes, turtles, lizards, etc.</p>
+					</div>
+					<div data-role="collapsible" data-collapsed="true">
+						<h4>Rodents</h4>
+						<a href="#cs" id="Rodents" data-role="button" data-icon="arrow-r" data-iconpos="right" data-mini="true">
+						<img src="images/Rodents.png" /> Browse Rodents</a>
+						<p>Rats, Mice, Chinchillas, and more.</p>
+					</div>
+				</div> <!-- end collapsible set -->
+				
+				<h3>Browse By Thumbnails</h3>
+				<div class="ui-grid-a">
+					<div class="ui-block-a" id="btn"><a href="#cs"><img src="images/Birds.png" /></a><br />Birds</div>
+					<div class="ui-block-b" id="btn"><a href="#cs"><img src="images/Cats.png" /></a><br />Cats</div>
+					<div class="ui-block-a" id="btn"><a href="#cs"><img src="images/Dogs.png" /></a><br />Dogs</div>
+					<div class="ui-block-b" id="btn"><a href="#cs"><img src="images/Farm_Animals.png" /></a><br />Farm Animals</div>
+					<div class="ui-block-a" id="btn"><a href="#cs"><img src="images/Mythical.png" /></a><br />Mythical</div>
+					<div class="ui-block-b" id="btn"><a href="#cs"><img src="images/Reptiles.png" /></a><br />Reptiles</div>
+					<div class="ui-block-a" id="btn"><a href="#cs"><img src="images/Rodents.png" /></a><br />Rodents</div>
+				</div><!-- /grid-b -->
+				
+			</div> <!-- end browsePets -->
+		</div> <!-- end content -->
+		
+		<!-- Footer -->
+		<footer data-role="footer" data-position="fixed" data-theme="b" data-id="navfooter">
+			<nav id="navi">
+			<div data-role="navbar" data-theme="b">
+				<ul>
+					<li><a href="#home" data-role="button" data-ajax="false" class="ui-btn-active ui-state-persist">Home</a></li>
+					<li><a href="#addItem" data-role="button" data-ajax="false">Add Pet</a></li>
+					<li><a href="#info" data-role="button" data-ajax="false">About Me</a></li>
+					<li><a href="#news" data-role="button" data-ajax="false">News</a></li>
+				</ul>
+			</div><!-- /navbar -->
+			<small>&copy; 2012 Kevin Ward, All Rights Reserved.</small>
+			</nav>
+		</footer> <!-- end footer -->
+	</div>
+	<!-- End Home Page -->
+	
+	
+	<!-- Add Item Page -->
+	<div data-role="page" id="addItem" data-add-back-btn="true" data-theme="b">
+	
+		<header data-role="header" data-theme="b">
+			<nav id="addPetFeature">
+				<h2><a href="#home"><img src="images/img.png" width="40" height="50" title="My Joker Face." /></a>
+				Add a KoolPet!</h2>
+			</nav>
+		</header>
+
+		<!-- Main body of page -->
+		<div data-role="content" id="petsForm" data-theme="b">
+		<div id="KoolPetForm">
+			<h3>Choose the type of KoolPet you want!.</h3>
+				<nav id="showLoseAdd">
+				<a href="#showItem" id="showData" data-role="button" data-mini="true" data-inline="true" data-ajax="false" rel="external">Show KoolPets</a> 
+				<a href="#addItem" id="clearData" data-role="button" data-mini="true" data-inline="true" data-ajax="false" rel="external">Release all KoolPets</a> 
+				<a href="#addItem" id="addNew" style="display:none;" "data-role="button" data-mini="true" data-inline="true" data-ajax="false" rel="external">Add New KoolPet</a>
+				</nav>
+			<br />
+			<form action="#" id="petForm" data-role="none">
+				<fieldset id="petFieldset">
+					<legend>Choose Wisely!</legend>
+					<span>* Fields are required</span>
+					
+					<ul id="questions">
+						<div data-role="fieldcontain" name="petsType" id="petsType">
+							<label for="petsType">KoolPet Type: *</label>
+							<br />
+								<select id="petGroups" class="required">
+									<option data-placeholder="true">Choose A Pet Group:</option>
+									<option value="Birds">Birds</option>
+									<option value="Cats">Cats</option>
+									<option value="Dogs">Dogs</option>
+									<option value="Farm_Animals">Farm_Animals</option>
+									<option value="Mythical">Mythical</option>
+									<option value="Reptiles">Reptiles</option>
+									<option value="Rodents">Rodents</option>
+								</select>
+						</div>
+						
+						<div data-role="fieldcontain">
+							<label for="petName">KoolPet's Name: *</label>
+							<br />
+								<input type="text" name="petName" id="petName" value="" class="required" />
+								<p id="greyText">Example: Fluffy</p>
+						</div>
+						
+						<div data-role="fieldcontain">
+							<fieldset data-role="controlgroup" data-type="horizontal">
+								<legend for="genVal">Gender: *</legend>
+								<br />
+								<input type="radio" value="Male" name="genVal" id="male" checked="checked" class="required" />
+								<label for="male">Male</label>
+								<input type="radio" value="Female" name="genVal" id="female" />
+								<label for="female">Female</label>
+							</fieldset>
+						</div>
+						
+						<div data-role="fieldcontain">
+							<label for="favePet">Favorite KoolPet:</label>
+							<br />
+								<select name="favePet" id="favePet" data-role="slider">
+									<option value="off">No</option>
+									<option value="on">Yes</option>
+								</select>
+						</div>
+						
+						<div data-role="fieldcontain">
+							<label for="koolness">Koolness Factor:</label>
+							<br />
+							<input type="range" name="koolness" id="koolness" data-highlight="true" min="0" max="100" value="50" step="5" data-theme="b" />
+						</div>
+						
+						<div data-role="fieldcontain">
+							<label for="comments">Comments:</label>
+							<br />
+							<textarea name="comments" id="comments">Blank</textarea>
+						</div>
+					</ul>
+				<div data-role="fieldcontain">
+					<div class="ui-grid-a">
+						<div class="ui-block-a"><input type="submit" value="Submit KoolPet" name="submit" id="submit" data-theme="b" /></div>
+						<div class="ui-block-b"><input type="reset" value="Reset Page" name="reset" id="reset" data-theme="a" /></div>
+					</div>
+				</div>
+				
+				<a href="#addItemErrors" id="aierrorsLink" data-rel="dialog" data-transition="pop">Open box of worms</a>
+				
+				</fieldset>
+			</form>
+		</div> <!-- end koolpetform -->
+		</div> <!-- end content -->
+
+		<footer data-role="footer" data-position="fixed" data-theme="b" data-id="navfooter">
+			<nav id="navi">
+			<div data-role="navbar" data-theme="b">
+				<ul>
+					<li><a href="#home" data-role="button" data-ajax="false">Home</a></li>
+					<li><a href="#addItem" data-role="button" data-ajax="false" class="ui-btn-active ui-state-persist">Add Pet</a></li>
+					<li><a href="#info" data-role="button" data-ajax="false">About Me</a></li>
+					<li><a href="#news" data-role="button" data-ajax="false">News</a></li>
+				</ul>
+			</div><!-- /navbar -->
+			<small>&copy; 2012 Kevin Ward, All Rights Reserved.</small>
+			</nav>
+		</footer> <!-- end footer -->
+	</div>
+	<!-- End Add Item Page -->
+	
+	
+	<!-- Show Item Page -->
+	<div data-role="page" id="showItem" data-add-back-btn="true" data-theme="b">
+		<header data-role="header" data-theme="b">
+			<nav id="addPetFeature">
+				<h2><a href="#home"><img src="images/img.png" width="40" height="50" title="My Joker Face." /></a>
+				Show KoolPets!</h2>
+			</nav>
+		</header> <!-- end header -->
+		
+		<div data-role="content" id="petsForm" data-theme="b">
+			<nav id="showLoseAdd">
+				<a href="#showItem" id="showData" style="display:none;" data-role="button" data-mini="true" data-inline="true" data-ajax="false" rel="external">Show KoolPets</a> 
+				<a href="#addItem" id="clearData" data-role="button" data-mini="true" data-inline="true" data-ajax="false" rel="external">Release all KoolPets</a> 
+				<a href="#addItem" id="addNew" data-role="button" data-mini="true" data-inline="true" data-ajax="false" rel="external">Add New KoolPet</a>
+				<br />
+				<a href="#showItem" id="sJ" data-role="button" data-mini="true" data-inline="true" data-ajax="false" rel="external">Show JSON Pets</a>
+				<a href="#showItem" id="sX" data-role="button" data-mini="true" data-inline="true" data-ajax="false" rel="external">Show XML Pets</a>
+				<a href="#showItem" id="sC" data-role="button" data-mini="true" data-inline="true" data-ajax="false" rel="external">Show CSV Pets</a>
+				</nav>
+			<br />
+			<!-- This is where the list of pets will appear. -->
+			<div id="items" class="itemlist" data-theme="b">
+			
+				<div id="searchPets" data-theme="a">
+					<!-- Live text search from "http://www.designchemical.com/blog/index.php/jquery/live-text-search-function-using-jquery/" -->
+					<form id="live-search" action="" class="styled" method="post">
+						<fieldset>
+							<input type="text" class="text-input" id="filter" value="" data-mini="true" />
+							<span id="filter-count"></span>
+						</fieldset>
+					</form>
+				</div> <!-- end searchPets -->
+				
+				<br />
+				
+				<ul id="petList" data-role="listview" data-theme="b">
+				
+				</ul>
+				
+				<br />
+			
+			</div> <!-- end items -->
+			
+		</div> <!-- end content -->
+
+		<footer data-role="footer" data-position="fixed" data-theme="b" data-id="navfooter">
+			<nav id="navi">
+			<div data-role="navbar" data-theme="b">
+				<ul>
+					<li><a href="#home" data-role="button" data-ajax="false">Home</a></li>
+					<li><a href="#addItem" data-role="button" data-ajax="false" class="ui-btn-active ui-state-persist">Add Pet</a></li>
+					<li><a href="#info" data-role="button" data-ajax="false">About Me</a></li>
+					<li><a href="#news" data-role="button" data-ajax="false">News</a></li>
+				</ul>
+			</div><!-- /navbar -->
+			<small>&copy; 2012 Kevin Ward, All Rights Reserved.</small>
+			</nav>
+		</footer> <!-- end footer -->
+		
+	</div>
+	<!-- End Show Item Page -->
+	
+	
+	<!-- Info Page -->
+	<div data-role="page" id="info" data-add-back-btn="true" data-theme="b">
+		<header data-role="header" data-theme="b">
+			<nav id="addPetFeature">
+				<h1><a href="index.html"><img src="images/img.png" width="40" height="50" title="My Joker Face." /></a>
+				About KoolPetsDex</h1>
+			</nav>
+		</header> <!-- end header -->
+		
+		<!-- Main body of page -->
+		<div data-role="content" id="petsearchbrowse" data-theme="b">
+			<div id="author">
+				<div data-role="fieldcontain">
+				<h3>About the Author</h3>
+				<p>Hello User, My name is Kevin Ward.<br />
+				I study here at Full Sail University.
+				I created this page to tell a little about me, and my web app KoolPetsDex.<br />
+				I created all the HTML, JS, and CSS. The Joker Face image was also created 
+				by me. The animal category images were made by my lovely wife Katrina Ward.<br />
+				The under construction image was found 
+				<a href="http://www.donotenter.com/cool/ucgraphics/large/page4/index.htm" data-ajax="false" rel="external">here.</a><br />
+				Live Text Search function was found 
+				<a href="http://www.designchemical.com/blog/index.php/jquery/live-text-search-function-using-jquery/" data-ajax="false" rel="external">here</a>, 
+				and modified to fit my code.<br />
+				All images are used under creative commons act. All Rights Reserved.</p>
+				</div>
+				
+				<div data-role="fieldcontain">
+				<h4>Links</h4>
+				<p><a href="#home" data-role="button" data-mini="true" data-inline="true" data-ajax="false" rel="external">Home</a>
+				<a href="../index.html" data-role="button" data-mini="true" data-inline="true" data-ajax="false" rel="external">ASD Mobile App</a>
+				<a href="http://xalicus.github.com/ASD1211/index.html" data-role="button" data-mini="true" data-inline="true" data-ajax="false" rel="external">ASD GH Pages App</a>
+				</p>
+				</div>
+			</div>
+		</div> <!-- end content -->
+		
+		<!-- Footer -->
+		<footer data-role="footer" data-position="fixed" data-theme="b" data-id="navfooter">
+			<nav id="navi">
+			<div data-role="navbar" data-theme="b">
+				<ul>
+					<li><a href="#home" data-role="button" data-ajax="false">Home</a></li>
+					<li><a href="#addItem" data-role="button" data-ajax="false">Add Pet</a></li>
+					<li><a href="#info" data-role="button" data-ajax="false" class="ui-btn-active ui-state-persist">About Me</a></li>
+					<li><a href="#news" data-role="button" data-ajax="false">News</a></li>
+				</ul>
+			</div><!-- /navbar -->
+			<small>&copy; 2012 Kevin Ward, All Rights Reserved.</small>
+			</nav>
+		</footer> <!-- end footer -->
+	</div>
+	<!-- End Info Page -->
+	
+	
+	<!-- News Stream Page -->
+	<div data-role="page" id="news" data-add-back-btn="true" data-theme="b">
+	<!-- Header -->
+		<header data-role="header" data-theme="b">
+			<nav id="addPetFeature">
+				<h1><a href="index.html"><img src="images/img.png" width="40" height="50" title="My Joker Face." /></a>
+				KoolPetsDex News Stream</h1>
+			</nav>
+		</header> <!-- end header -->
+		
+		<!-- Main body of page -->
+		<div data-role="content" id="petsearchbrowse" data-theme="b">
+			<div id="news1">
+				<div data-role="fieldcontain">
+				<h3>KoolPetsDex News of DOOM!</h3>
+				</div>
+				
+				<div data-role="fieldcontain">
+				<h4>November 12th, 2012</h4>
+				<p>Started ASD 1211 Week 4.</p>
+				</div>
+				
+				<div data-role="fieldcontain">
+				<h4>November 5th, 2012</h4>
+				<p>Started ASD 1211 Week 3.</p>
+				</div>
+				
+				<div data-role="fieldcontain">
+				<h4>October 29th, 2012</h4>
+				<p>Started ASD 1211 Week 2.</p>
+				</div>
+				
+				<div data-role="fieldcontain">
+				<h4>October 22nd, 2012</h4>
+				<p>Started ASD 1211 Week 1.</p>
+				</div>
+				
+				<div data-role="fieldcontain">
+				<h4>October 16th, 2012</h4>
+				<p>Died of a massive brain hemorrhaging after ASD Class.</p>
+				</div>
+				
+				<div data-role="fieldcontain">
+				<h4>October 15th, 2012</h4>
+				<p>Started ASD 1210 Week 4.</p>
+				</div>
+				
+				<div data-role="fieldcontain">
+				<h4>October 8th, 2012</h4>
+				<p>Started ASD 1210 Week 3.</p>
+				</div>
+				
+				<div data-role="fieldcontain">
+				<h4>October 1st, 2012</h4>
+				<p>Started ASD 1210 Week 2.</p>
+				</div>
+				
+				<div data-role="fieldcontain">
+				<h4>September 24th, 2012</h4>
+				<p>Started ASD 1210 Week 1.</p>
+				</div>
+				
+				<div data-role="fieldcontain">
+				<h4>August 20th, 2012</h4>
+				<p>Started MIU 1208 Week 4.</p>
+				</div>
+				
+				<div data-role="fieldcontain">
+				<h4>August 13th, 2012</h4>
+				<p>Started MIU 1208 Week 3.</p>
+				</div>
+				
+				<div data-role="fieldcontain">
+				<h4>August 6th, 2012</h4>
+				<p>Started MIU 1208 Week 2.</p>
+				</div>
+				
+				<div data-role="fieldcontain">
+				<h4>July 30th, 2012</h4>
+				<p>Started MIU 1208 Week 1.</p>
+				</div>
+				
+				<div data-role="fieldcontain">
+				<h4>May 31st, 2011</h4>
+				<p>Started Full Sail University.</p>
+				</div>
+				
+				<div data-role="fieldcontain">
+				<h4>August 9th, 1981</h4>
+				<p>I was born.</p>
+				</div>
+			</div>
+		</div> <!-- end content -->
+		
+	<!-- Footer -->
+		<footer data-role="footer" data-position="fixed" data-theme="b" data-id="navfooter">
+			<nav id="navi">
+			<div data-role="navbar" data-theme="b">
+				<ul>
+					<li><a href="#home" data-role="button" data-ajax="false">Home</a></li>
+					<li><a href="#addItem" data-role="button" data-ajax="false">Add Pet</a></li>
+					<li><a href="#info" data-role="button" data-ajax="false">About Me</a></li>
+					<li><a href="#news" data-role="button" data-ajax="false" class="ui-btn-active ui-state-persist">News</a></li>
+				</ul>
+			</div><!-- /navbar -->
+			<small>&copy; 2012 Kevin Ward, All Rights Reserved.</small>
+			</nav>
+		</footer> <!-- end footer -->
+	</div>
+	<!-- End News Stream Page -->
+	
+	
+	<!-- Under Construction Page -->
+	<div data-role="page" id="cs" data-add-back-btn="true" data-theme="b">
+		<!-- Header -->
+		<header data-role="header" data-theme="b">
+			<nav id="addPetFeature">
+				<h1><a href="index.html"><img src="images/img.png" width="40" height="50" title="My Joker Face." /></a>
+				Under Construction</h1>
+			</nav>
+		</header> <!-- end header -->
+		
+		<!-- Main body of page -->
+		<div data-role="content" id="petsearchbrowse" data-theme="b">
+			<div id="underconst">
+				<h3>Oops... You found our hideout!</h3>
+				<img src="images/uc2_large02.gif" width="300" height="150" title="Under Construction" />
+				<p>Since you found us out, I'll lead you back home.<br />
+				Click here to go <a href="#home" data-ajax="false">Home</a></p>
+			</div>
+		</div> <!-- end content -->
+		
+		<!-- Footer -->
+		<footer data-role="footer" data-position="fixed" data-theme="b" data-id="navfooter">
+			<nav id="navi">
+			<div data-role="navbar" data-theme="b">
+				<ul>
+					<li><a href="#home" data-role="button" data-ajax="false">Home</a></li>
+					<li><a href="#addItem" data-role="button" data-ajax="false">Add Pet</a></li>
+					<li><a href="#info" data-role="button" data-ajax="false">About Me</a></li>
+					<li><a href="#news" data-role="button" data-ajax="false">News</a></li>
+				</ul>
+			</div><!-- /navbar -->
+			<small>&copy; 2012 Kevin Ward, All Rights Reserved.</small>
+			</nav>
+		</footer> <!-- end footer -->
+	</div>
+	<!-- End Under Construction Page -->
+
+	<!-- JavaScript under here -->
+	<script type="text/javascript" src="main.js"></script>
+
+	
+</body>
 </html>

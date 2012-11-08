@@ -1,13 +1,13 @@
 {
   "env": {
     "default": {
-      "db": "http://user:password@127.0.0.1:5984/development"
+      "db": "http://127.0.0.1:5984/asd1211"
     },
     "staging": {
-      "db": "http://user:password@127.0.0.1:5984/staging"
+      "db": "http://127.0.0.1:5984/asd1211"
     },
     "production": {
-      "db": "http://user:password@127.0.0.1:5984/production"
+      "db": "https://xalicus:katt4ever@xalicus.cloudant.com/asd1211"
     }
   }
 }
