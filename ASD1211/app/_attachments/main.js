@@ -537,12 +537,29 @@ var getImg = function(catName, makeSubList) {
 	clearLink.on('click', clearDataStorage);
 	/*var saveData = $("#submit");
 	saveData.on('click', myForm.validate);*/
-	/*var showJSON = $("#sJ");
-	showJSON.on('click', showJ);*/
-	/*var showXML = $("#sX");
-	showXML.on('click', showX);*/
-	/*var showCSV = $("#sC");
-	showCSV.on('click', showC);*/
 
 
 }); // End code for page.
+
+var urlVars = function() {
+	var urlData = $($.mobile.activePage).data("url");
+	var urlParts = urlData.split('?');
+	var urlPairs = urlParts[1].split('&');
+	var urlValues = {};
+	for (var pair in urlPairs) {
+		var keyValue = urlPairs[pair].split('=');
+		var key = decodeURIComponent(keyValue[0]);
+		var value = decodeURIComponent(keyValue[1]);
+		urlValues[key] = value;
+	}
+	return urlValues;
+};
+
+$('#showPets').on("pageshow", function () {
+	var pets = urlVars()["group"];
+	console.log(pets);
+	$.couch.db("asd1211").view("koolpetsdex/petGroups", {
+		key: "pets: " + pets
+	});
+	
+});	// End code for show pets page.
