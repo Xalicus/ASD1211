@@ -1,5 +1,5 @@
 function (doc) {
-  if (doc._id.substr(0,5) === "birds:") {
+  if (doc._id.substr(0,5) === "groups:") {
     emit(doc._id.substr(5), {
     	"koolPet_Groups": doc.petGroups,
     	"koolPet_Name": doc.petName,

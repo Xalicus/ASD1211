@@ -15,7 +15,7 @@ $(document).on("pageshow", "#home", function() {
 
 $(document).on("pageshow", "#addItem", function() {
 	
-	var doc {
+	var doc = {
 		
 		
 	};
@@ -397,8 +397,7 @@ $("#filter").keyup(function(){
 		},
 		error: function(status) {
 			console.log(status);
-		},
-		reduce: false;
+		}
 	});
 
 /*
@@ -575,7 +574,7 @@ var getImg = function(catName, makeSubList) {
 
 }); // End code for page.
 
-var urlVars = function() {
+var urlVars = function(urlData) {
 	var urlData = $($.mobile.activePage).data("url");
 	var urlParts = urlData.split('?');
 	var urlPairs = urlParts[1].split('&');
@@ -586,14 +585,16 @@ var urlVars = function() {
 		var value = decodeURIComponent(keyValue[1]);
 		urlValues[key] = value;
 	}
+	console.log(urlValues);
 	return urlValues;
 };
 
 $(document).on("pageshow", "#showPets", function() {
 	var pets = urlVars()["group"];
 	console.log(pets);
-	$.couch.db("asd1211").view("koolpetsdex/petGroups", {
-		key: "pets: " + pets
+	$.couch.db("asd1211").view("koolpetsdex/groups", {
+		key: "groups: " + petgroups
 	});
 	
 });	// End code for show pets page.
+
