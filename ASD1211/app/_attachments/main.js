@@ -15,7 +15,13 @@ $(document).on("pageshow", "#home", function() {
 
 $(document).on("pageshow", "#addItem", function() {
 	
-	$.couch.db("asd1210").saveDoc("petsdex/pets", {
+	var doc {
+		
+		
+	};
+	
+	// Create portion of CRUD
+	$.couch.db("asd1211").saveDoc("koolpetsdex/pets", {
 	    success: function(data) {
 	        console.log(data);
 	        $.each(data.rows, function(index, pet) {
@@ -30,7 +36,8 @@ $(document).on("pageshow", "#addItem", function() {
 	    }
 	});
 	
-	$.couch.db("asd1210").view("petsdex/pets", {
+	// Read portion of CRUD
+	$.couch.db("asd1211").view("koolpetsdex/pets", {
 		success: function(data) {
 			console.log(data);
 			$('#petList').empty();
@@ -45,6 +52,29 @@ $(document).on("pageshow", "#addItem", function() {
 				);
 			});
 			$('#petList').listview('refresh');
+		},
+		error: function(status) {
+			console.log(status);
+		}
+	});
+	
+	// Update portion of CRUD
+	$.couch.db("asd1211").openDoc(doc, {
+		success: function(data) {
+			console.log(data);
+		},
+		error: function(status) {
+			console.log(status);
+		}
+	});
+	
+	// Delete portion of CRUD
+	$.couch.db("asd1211").removeDoc(doc, {
+		success: function(data) {
+			console.log(data);
+		},
+		error: function(data) {
+			console.log(status);
 		}
 	});
 	
@@ -364,7 +394,11 @@ $("#filter").keyup(function(){
 				);
 			});
 			$('#petList').listview('refresh');
-		}
+		},
+		error: function(status) {
+			console.log(status);
+		},
+		reduce: false;
 	});
 
 /*
