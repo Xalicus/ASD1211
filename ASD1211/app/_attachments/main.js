@@ -3,7 +3,7 @@ Author: Kevin Ward
 Class: ASD1211
 */
 
-$('#home').on("pageshow", function(){
+$(document).on("pageshow", "#home", function() {
 	
 	// Home page code goes here.
 	$("header nav")
@@ -13,9 +13,9 @@ $('#home').on("pageshow", function(){
 }); // End code for home page.
 
 
-$('#addItem').on("pageshow", function(){
+$(document).on("pageshow", "#addItem", function() {
 	
-	/*$.couch.db("asd1210").saveDoc("petsdex/pets", {
+	$.couch.db("asd1210").saveDoc("petsdex/pets", {
 	    success: function(data) {
 	        console.log(data);
 	        $.each(data.rows, function(index, pet) {
@@ -46,7 +46,7 @@ $('#addItem').on("pageshow", function(){
 			});
 			$('#petList').listview('refresh');
 		}
-	});*/
+	});
 	
 	// This line of code is supposed to console log every div I click on in the add item page.
 	$('#petsForm div').on('click', function(e){
@@ -270,7 +270,7 @@ var changePage = function(pageId) {
 }); // End code for page.
 
 
-$("#showItem").on("pageshow", function(){
+$(document).on("pageshow", "#showItem", function() {
 	// Page code goes here.
 	$("header nav")
 		.slideDown()
@@ -337,8 +337,8 @@ $("#filter").keyup(function(){
 
 }; // end search function
 
-var showJSON = $("#sJ");
-showJSON.on('click', showJ);
+//var showJSON = $("#sJ");
+//showJSON.on('click', showJ);
 //var showXML = $("#sX");
 //showXML.on('click', showX);
 //var showCSV = $("#sC");
@@ -346,7 +346,7 @@ showJSON.on('click', showJ);
 
 
 // AJAX function to call the JSON data.
-function showJ() {
+//function showJ() {
 
 	$.couch.db("asd1211").view("koolpetsdex/pets", {
 		success: function(data) {
@@ -365,7 +365,7 @@ function showJ() {
 			});
 			$('#petList').listview('refresh');
 		}
-	})
+	});
 
 /*
 $.ajax({
@@ -415,7 +415,7 @@ $.ajax({
 		console.log("Show JSON broke!");
 	}
 })*/
-};
+//};
 // end showJ function
 
 // AJAX function to call the XML data.
@@ -555,7 +555,7 @@ var urlVars = function() {
 	return urlValues;
 };
 
-$('#showPets').on("pageshow", function () {
+$(document).on("pageshow", "#showPets", function() {
 	var pets = urlVars()["group"];
 	console.log(pets);
 	$.couch.db("asd1211").view("koolpetsdex/petGroups", {
