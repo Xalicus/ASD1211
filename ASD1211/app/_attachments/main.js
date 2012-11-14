@@ -3,7 +3,7 @@ Author: Kevin Ward
 Class: ASD1211
 */
 
-$("#home").on("pageshow", function() {
+$("#home").on("pageinit", function() {
 	console.log("Home page loaded! Yay!");
 	// Home page code goes here.
 	$("header nav")
@@ -13,12 +13,12 @@ $("#home").on("pageshow", function() {
 }); // End code for home page.
 
 
-$("#addItem").on("pageshow", function() {
+$("#addItem").on("pageinit", function() {
 	console.log("Add Item page loaded!");
 	
 	var doc = {
-		"_id": idVal
-		"_rev": revVal
+		"_id": "idVal",
+		"_rev": "revVal"
 	};
 	
 	// Create portion of CRUD
@@ -285,8 +285,9 @@ var clearDataStorage = function(){
 	};
 };
 
+// Save this code!
 var changePage = function(pageId) {
-	$('#' + pageId).trigger('pageshow');
+	$('#' + pageId).trigger('pageinit');
 	$.mobile.changePage($('#' + pageId), {transition:"slide"});
 };
 
@@ -297,7 +298,7 @@ var changePage = function(pageId) {
 }); // End code for page.
 
 
-$("#showItem").on("pageshow", function() {
+$("#showItem").on("pageinit", function() {
 	console.log("Show Item page loaded!");
 	
 	// Page code goes here.
@@ -324,7 +325,7 @@ $("#showItem").on("pageshow", function() {
 };*/
 
 var changePage = function(pageId) {
-	$('#' + pageId).trigger('pageshow');
+	$('#' + pageId).trigger('pageinit');
 	$.mobile.changePage($('#' + pageId), {transition:"slide"});
 };
 
@@ -386,8 +387,8 @@ $("#filter").keyup(function(){
 				$('#petList').append(
 					$('<li>').append(
 						$('<a>')
-							.attr("href", "pets.html?program=" + item.koolPet_Groups)
-							.text("Name: " + item.koolPet_Name + " in " + "Group: " + item.koolPet_Groups)
+							.attr("href", "pets.html?group=" + item.koolPet_Groups)
+							.text("Name: " + item.koolPet_Name + " in Group: " + item.koolPet_Groups)
 					)
 					//console.log(koolPet_Name + koolPet_Groups + gender + favorite_KoolPet + koolness + comments);
 				);
@@ -398,159 +399,6 @@ $("#filter").keyup(function(){
 			console.log(status);
 		}
 	});
-
-/*
-$.ajax({
-	"url"			: 'xhr/data.json',
-	"type"			: 'GET',
-	"dataType"		: 'json',
-	success			: function(data) {
-		$('#petList').empty();
-		
-		console.log("ShowJ sorta works.");*/
-/*			$.each(function(data) {
-			var pet = data.pets[i];
-				$('' +
-					getImg(object.petGroups[1]) +
-					'<li><p> KoolPet Name: ' + pet.petName + '</p>' +
-					'<p> KoolPet Group: ' + pet.petGroups + '</p>' +
-					'<p> KoolPet Gender: ' + pet.genVal + '</p>' +
-					'<p> Favorite KoolPet: ' + pet.favePet + '</p>' +
-					'<p> Koolness Factor: ' + pet.koolnes + '</p>' +
-					'<p> Comments: ' + pet.comments + '</p></li>'
-				).appendTo("#petList");
-				console.log(pet);
-			});*/
-/*
-		for(var i=0, j=data.pets.length; i<j; i++){
-			var pet = data.pets[i];
-			$('' +
-				'<li class="jpets">' +
-					//getImg(object.petGroups[1]) +
-					'<h2>'+ pet.petName +'</h2>' +
-					'<p>'+ pet.petGroups +'</p>' +
-					'<p>'+ pet.genVal +'</p>' +
-					'<p>'+ pet.favePet +'</p>' +
-					'<p>'+ pet.koolness +'</p>' +
-					'<p>'+ pet.comments +'</p>' +
-				'</li>'
-			).appendTo('#petList');
-		};
-		
-		console.log(data.pets);
-		//$.mobile.changePage("#showItem");
-		$('#petList').listview('refresh');
-		//};
-	},
-	error: function(data) {
-		console.log(data);
-		console.log("Show JSON broke!");
-	}
-})*/
-//};
-// end showJ function
-
-// AJAX function to call the XML data.
-/*function showX() {
-$.ajax({
-	"url"			: 'xhr/data.xml',
-	"type"			: 'GET',
-	"dataType"	 	: 'xml',
-	success			: function(data) {
-		$('#petList').empty();
-		var dataA = $.parseXML(data);
-		var items = $( dataA );
-		items.find('item').each(function(){
-			var item = $(this);
-			$('' +
-				getImg(object.petGroups[1], makeSubList) +
-				'<li><p> KoolPet Name: ' + item.petName + '</p>' +
-				'<p> KoolPet Group: ' + item.petGroups + '</p>' +
-				'<p> KoolPet Gender: ' + item.genVal + '</p>' +
-				'<p> Favorite KoolPet: ' + item.favePet + '</p>' +
-				'<p> Koolness Factor: ' + item.koolness + '</p>' +
-				'<p> Comments: ' + item.comments + '</p></li>'
-			).appendTo('#petList');
-			console.log("Name: ", item.find("petName"));
-		});*/
-	
-		/*for(var i=0, j=pets.pet.length; i<j; i++){
-			var pet = pets.pet[i];
-			$(''+
-				'<div class="xpets">'+
-					getImg(object.petGroups[1], makeSubList) +
-					'<h2>'+ pet.petName +'</h2>'+
-					'<p>'+ pet.petGroups +'</p>'+
-					'<p>'+ pet.genVal +'</p>'+
-					'<p>'+ pet.favePet +'</p>'+
-					'<p>'+ pet.koolness +'</p>'+
-					'<p>'+ pet.comments +'</p>'+
-				'</div>'
-			).appendTo('#items');
-		};*/
-		
-		//console.log(pets.pet);
-		/*$.mobile.changePage("#showItem");
-		$('#petList').listview('refresh');
-	},
-	error: function(data) {
-		console.log(data);
-		console.log("Show XML Broke!");
-	}
-	
-})
-};*/
-// end showX function
-
-// AJAX function to call the CSV data.
-/*function showC() {
-$.ajax({
-	url			: 'xhr/data.csv',
-	type		: 'GET',
-	dataType	: 'text',
-	success		: function(data) {
-		$('#petList').empty();
-			
-			// Assume that your entire CSV file is in the data variable.
-			// The "\n" is the string escape for the end-of-line character.
-			var lines = data.split("\n");
-			for (var lineNum = 0; lineNum < lines.length; lineNum++) {
-				// Get the current line/row
-				var row = lines[lineNum];
-				var columns = row.split(",");
-				// The columns variable is now an array.
-				return (columns);
-				console.log(columns);
-				return columns;
-			} // for lineNum
-			
-			$.each(function(columns) {
-				$('' +
-					getImg(object.petGroups[1]) +
-					'<li><p> KoolPet Name: ' + columns.petName + '</p>' +
-					'<p> KoolPet Group: ' + columns.petGroups + '</p>' +
-					'<p> KoolPet Gender: ' + columns.genVal + '</p>' +
-					'<p> Favorite KoolPet: ' + columns.favePet + '</p>' +
-					'<p> Koolness Factor: ' + columns.koolnes + '</p>' +
-					'<p> Comments: ' + columns.comments + '</p></li>'
-				).appendTo("#petList");
-			});
-
-		// $.csv.toArrays(csv, options, callback);
-		// console.log(csv, options, callback);
-		
-		console.log(columns);
-		$.mobile.changePage("#showItem");
-		$('#petList').listview('refresh');
-	},
-	error: function(data) {
-		console.log(data);
-		console.log("Show CSV Broke!");
-	}
-	
-})
-};*/
-// end showC function
 
 // This is to get images for the correct category.
 var getImg = function(catName, makeSubList) {
@@ -565,8 +413,8 @@ var getImg = function(catName, makeSubList) {
 // My Variables
 	/*var showData = $("#showData");
 	showData.on('click', getData);*/
-	var clearLink = $("#clearData");	
-	clearLink.on('click', clearDataStorage);
+	/*var clearLink = $("#clearData");	
+	clearLink.on('click', clearDataStorage);*/
 	/*var saveData = $("#submit");
 	saveData.on('click', myForm.validate);*/
 
@@ -588,20 +436,20 @@ var urlVars = function(urlData) {
 	return urlValues;
 };
 
-$("#showPets").on("pageshow", function() {
+$("#showPets").on("pageinit", function() {
 	console.log("Show Pets page loaded!");
 	
 	var pets = urlVars()["group"];
 	console.log(pets);
 	$.couch.db("asd1211").view("koolpetsdex/groups", {
-		key: "groups: " + "petgroups"
+		key: "groups: " + "petGroups"
 	});
 	
 	var changePage = function(pageId) {
-		$('#' + pageId).trigger('pageshow');
+		$('#' + pageId).trigger('pageinit');
 		$.mobile.changePage($('#' + pageId), {
 			type:"post",
-			data:$("form").serialize(),
+			data:$("petForm").serialize(),
 			reloadPage:true,
 			transition:"slide"
 		});
