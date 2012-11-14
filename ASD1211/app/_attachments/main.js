@@ -3,8 +3,8 @@ Author: Kevin Ward
 Class: ASD1211
 */
 
-$(document).on("pageshow", "#home", function() {
-	
+$("#home").on("pageshow", function() {
+	console.log("Home page loaded! Yay!");
 	// Home page code goes here.
 	$("header nav")
 		.slideDown()
@@ -13,11 +13,12 @@ $(document).on("pageshow", "#home", function() {
 }); // End code for home page.
 
 
-$(document).on("pageshow", "#addItem", function() {
+$("#addItem").on("pageshow", function() {
+	console.log("Add Item page loaded!");
 	
 	var doc = {
-		
-		
+		"_id": idVal
+		"_rev": revVal
 	};
 	
 	// Create portion of CRUD
@@ -119,10 +120,6 @@ $(document).on("pageshow", "#addItem", function() {
 		});
 
 	//any other code needed for addItem page goes here
-
-	// My Variables for the functions
-	//var	genVal;
-	//var	faveValue = "No";
 
 
 //The functions below can go inside or outside the pageinit function for the page in which it is needed.
@@ -300,7 +297,9 @@ var changePage = function(pageId) {
 }); // End code for page.
 
 
-$(document).on("pageshow", "#showItem", function() {
+$("#showItem").on("pageshow", function() {
+	console.log("Show Item page loaded!");
+	
 	// Page code goes here.
 	$("header nav")
 		.slideDown()
@@ -313,7 +312,7 @@ $(document).on("pageshow", "#showItem", function() {
 	};
 
 // My Clear Data Function
-var clearDataStorage = function(){
+/*var clearDataStorage = function(){
 	if(localStorage.length === 0) {
 		alert("No KoolPets in the KoolPetsDex.");
 	} else {
@@ -322,7 +321,7 @@ var clearDataStorage = function(){
 		window.location.reload();
 		return false;
 	};
-};
+};*/
 
 var changePage = function(pageId) {
 	$('#' + pageId).trigger('pageshow');
@@ -589,12 +588,23 @@ var urlVars = function(urlData) {
 	return urlValues;
 };
 
-$(document).on("pageshow", "#showPets", function() {
+$("#showPets").on("pageshow", function() {
+	console.log("Show Pets page loaded!");
+	
 	var pets = urlVars()["group"];
 	console.log(pets);
 	$.couch.db("asd1211").view("koolpetsdex/groups", {
-		key: "groups: " + petgroups
+		key: "groups: " + "petgroups"
 	});
 	
+	var changePage = function(pageId) {
+		$('#' + pageId).trigger('pageshow');
+		$.mobile.changePage($('#' + pageId), {
+			type:"post",
+			data:$("form").serialize(),
+			reloadPage:true,
+			transition:"slide"
+		});
+	};
 });	// End code for show pets page.
 
