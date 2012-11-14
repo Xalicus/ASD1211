@@ -47,8 +47,8 @@ $("#addItem").on("pageinit", function() {
 				$('#petList').append(
 					$('<li>').append(
 						$('<a>')
-							.attr("href", "pets.html?program=" + item.koolPet_Groups)
-							.text(item.koolPet_Name + " in " + item.koolPet_Groups)
+							.attr("href", "pets.html?group=" + item.koolPet_Groups)
+							.text(item.koolPet_Name + " in Group: " + item.koolPet_Groups)
 					)
 				);
 			});
@@ -412,10 +412,10 @@ var getImg = function(catName, makeSubList) {
 
 // My Variables
 	/*var showData = $("#showData");
-	showData.on('click', getData);*/
-	/*var clearLink = $("#clearData");	
-	clearLink.on('click', clearDataStorage);*/
-	/*var saveData = $("#submit");
+	showData.on('click', getData);
+	var clearLink = $("#clearData");	
+	clearLink.on('click', clearDataStorage);
+	var saveData = $("#submit");
 	saveData.on('click', myForm.validate);*/
 
 
