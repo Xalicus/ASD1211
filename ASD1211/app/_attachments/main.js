@@ -9,6 +9,16 @@ $("#home").on("pageinit", function() {
 	$("header nav")
 		.slideDown()
 	;
+	
+	var changePage = function(pageId) {
+		$('#' + pageId).trigger('pageinit');
+		$.mobile.changePage($('#' + pageId), {
+			type:"post",
+			data:$("petForm").serialize(),
+			reloadPage:true,
+			transition:"slide"
+		});
+	};
 
 }); // End code for home page.
 
@@ -17,12 +27,12 @@ $("#addItem").on("pageinit", function() {
 	console.log("Add Item page loaded!");
 	
 	var doc = {
-		"_id": "idVal",
-		"_rev": "revVal"
+		"_id": "7697f43997fcc700d494bbc3720007b9"
+		"_rev": "1-0184c44d84fe480e7db53a96020657f5"
 	};
 	
 	// Create portion of CRUD
-	$.couch.db("asd1211").saveDoc("koolpetsdex/pets", {
+	$.couch.db("asd1211").saveDoc(doc, {
 	    success: function(data) {
 	        console.log(data);
 	        $.each(data.rows, function(index, pet) {
@@ -288,7 +298,12 @@ var clearDataStorage = function(){
 // Save this code!
 var changePage = function(pageId) {
 	$('#' + pageId).trigger('pageinit');
-	$.mobile.changePage($('#' + pageId), {transition:"slide"});
+	$.mobile.changePage($('#' + pageId), {
+		type:"post",
+		data:$("petForm").serialize(),
+		reloadPage:true,
+		transition:"slide"
+	});
 };
 
 // My Variables
@@ -324,10 +339,15 @@ $("#showItem").on("pageinit", function() {
 	};
 };*/
 
-var changePage = function(pageId) {
-	$('#' + pageId).trigger('pageinit');
-	$.mobile.changePage($('#' + pageId), {transition:"slide"});
-};
+	var changePage = function(pageId) {
+		$('#' + pageId).trigger('pageinit');
+		$.mobile.changePage($('#' + pageId), {
+			type:"post",
+			data:$("petForm").serialize(),
+			reloadPage:true,
+			transition:"slide"
+		});
+	};
 
 var search = function() {
 	var getInput = $('#searchField').val();
