@@ -3,7 +3,7 @@ function (doc) {
     emit(doc._id.substr(5), {
     	"koolPet_Groups": doc.petGroups,
     	"koolPet_Name": doc.petName,
-    	"gender": doc.genderValue,
+    	"gender": doc.genderVal,
     	"favorite_KoolPet": doc.favePet,
     	"koolness": doc.koolness,
     	"comments": doc.comments

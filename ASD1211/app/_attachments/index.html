@@ -80,7 +80,7 @@ Class: ASD1211
 					</div>
 					<div data-role="collapsible" data-collapsed="true">
 						<h4>Mythical</h4>
-						<a href="#cs" id="Mythical" data-role="button" data-icon="arrow-r" data-iconpos="right" data-mini="true">
+						<a href="pets.html" id="Mythical" data-role="button" data-icon="arrow-r" data-iconpos="right" data-mini="true">
 						<img src="Mythical.png" /> Browse Mythical</a>
 						<p>Dragons to Unicorns, we got 'em!</p>
 					</div>
@@ -180,11 +180,11 @@ Class: ASD1211
 						
 						<div data-role="fieldcontain">
 							<fieldset data-role="controlgroup" data-type="horizontal">
-								<legend for="genVal">Gender: *</legend>
+								<legend for="genderVal">Gender: *</legend>
 								<br />
-								<input type="radio" value="Male" name="genVal" id="male" checked="checked" class="required" />
+								<input type="radio" value="Male" name="genderVal" id="male" checked="checked" class="required" />
 								<label for="male">Male</label>
-								<input type="radio" value="Female" name="genVal" id="female" />
+								<input type="radio" value="Female" name="genderVal" id="female" />
 								<label for="female">Female</label>
 							</fieldset>
 						</div>
@@ -321,8 +321,8 @@ Class: ASD1211
 				<p>Hello User, My name is Kevin Ward.<br />
 				I study here at Full Sail University.
 				I created this page to tell a little about me, and my web app KoolPetsDex.<br />
-				I created all the HTML, JS, and CSS. The Joker Face image was also created 
-				by me. The animal category images were made by my lovely wife Katrina Ward.<br />
+				I created all the HTML, JS, and CSS. The Joker Face image was also created by me.<br />
+				The animal category images were made by my lovely wife Katrina Ward.<br />
 				The under construction image was found 
 				<a href="http://www.donotenter.com/cool/ucgraphics/large/page4/index.htm" data-ajax="false" rel="external">here.</a><br />
 				Live Text Search function was found 
@@ -334,8 +334,8 @@ Class: ASD1211
 				<div data-role="fieldcontain">
 				<h4>Links</h4>
 				<p><a href="#home" data-role="button" data-mini="true" data-inline="true" data-ajax="false" rel="external">Home</a>
-				<a href="../index.html" data-role="button" data-mini="true" data-inline="true" data-ajax="false" rel="external">ASD Mobile App</a>
-				<a href="http://xalicus.github.com/ASD1211/index.html" data-role="button" data-mini="true" data-inline="true" data-ajax="false" rel="external">ASD GH Pages App</a>
+				<!-- <a href="../index.html" data-role="button" data-mini="true" data-inline="true" data-ajax="false" rel="external">ASD Mobile App</a> -->
+				<a href="https://xalicus.cloudant.com/asd1211/_design/koolpetsdex/index.html" data-role="button" data-mini="true" data-inline="true" data-ajax="false" rel="external">ASD1211 Cloudant App</a>
 				</p>
 				</div>
 			</div>
@@ -374,6 +374,17 @@ Class: ASD1211
 			<div id="news1">
 				<div data-role="fieldcontain">
 				<h3>KoolPetsDex News of DOOM!</h3>
+				</div>
+				
+				<div data-role="fieldcontain">
+				<h4>November 22th, 2012</h4>
+				<p>Thanksgiving Day!<br />
+				Be thankful for what and who you have in your life.</p>
+				</div>
+				
+				<div data-role="fieldcontain">
+				<h4>November 16th, 2012</h4>
+				<p>Twilight: Breaking Dawn part 2 comes to a theater near YOU!</p>
 				</div>
 				
 				<div data-role="fieldcontain">
@@ -507,6 +518,40 @@ Class: ASD1211
 		</footer> <!-- end footer -->
 	</div>
 	<!-- End Under Construction Page -->
+
+	<!-- Add Item Errors Page -->
+	<div data-role="dialog" id="addItemErrors" data-theme="b">
+		<!-- Header -->
+		<header data-role="header" data-theme="b">
+			<nav id="addPetFeature">
+				<h1><a href="index.html"><img src="img.png" width="40" height="50" title="My Joker Face." /></a>
+				I am Error.</h1>
+			</nav>
+		</header> <!-- end header -->
+		
+		<!-- Main body of page -->
+		<div data-role="content" id="petsearchbrowse" data-theme="b">
+			<ul>
+				<li>Must See Pets!!!</li>
+			</ul>
+		</div> <!-- end content -->
+		
+		<!-- Footer -->
+		<footer data-role="footer" data-position="fixed" data-theme="b" data-id="navfooter">
+			<nav id="navi">
+			<div data-role="navbar" data-theme="b">
+				<ul>
+					<li><a href="#home" data-role="button" data-ajax="false">Home</a></li>
+					<li><a href="#addItem" data-role="button" data-ajax="false">Add Pet</a></li>
+					<li><a href="#info" data-role="button" data-ajax="false">About Me</a></li>
+					<li><a href="#news" data-role="button" data-ajax="false">News</a></li>
+				</ul>
+			</div><!-- /navbar -->
+			<small>&copy; 2012 Kevin Ward, All Rights Reserved.</small>
+			</nav>
+		</footer> <!-- end footer -->
+	</div>
+	<!-- End Add Item Errors Page -->
 
 	<!-- JavaScript under here -->
 	<script type="text/javascript" src="main.js"></script>

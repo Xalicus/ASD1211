@@ -27,14 +27,16 @@ $("#addItem").on("pageinit", function() {
 	console.log("Add Item page loaded!");
 
 // My Variables
-/*var showData = $("#showData");
-showData.on('click', getData);
+var showPet = $("#showData");
+showPet.on('click', readPet);
 var clearLink = $("#clearData");	
-clearLink.on('click', clearDataStorage);
-var saveData = $("#submit");
-saveData.on('click', createPet);*/
+clearLink.on('click', deletePet);
+var savePet = $("#submit");
+savePet.on('click', createPet);
 	
-	var doc = {
+// This is supposed to create the variable doc to pass to the 
+//different functions, but it's not reading correctly for some reason.
+/*var doc = {
 			
 	};
 	
@@ -45,8 +47,7 @@ saveData.on('click', createPet);*/
 	doc.genderVal = "genderVal";
 	doc.favePet = "favePet";
 	doc.koolness = "koolness";
-	doc.comments = "comments";
-	// etc.
+	doc.comments = "comments";*/
 	
 	// Create portion of CRUD
 	// Wrap in a save data function, like storeData from before.
@@ -69,7 +70,7 @@ var createPet = function(key){
 	
 	// Read portion of CRUD
 var readPet = function(){
-	$.couch.db("asd1211").view("koolpetsdex/pets", {
+	$.couch.db("asd1211").view(doc, {
 		success: function(data) {
 			console.log(data);
 			$('#petList').empty();
@@ -96,6 +97,40 @@ var updatePet = function(key) {
 	$.couch.db("asd1211").openDoc(doc, {
 		success: function(data) {
 			console.log(data);
+			
+			// Grab data from the item local storage.
+			var value = couch.db("asd1211").getItem(this.key);
+			var item = (pet.value || pet.doc);
+				
+			// Populate the form fields with current localStorage values.
+			$("#petGroups").value = item.koolPet_Groups[1].val();
+			$("#petName").value = item.koolPet_Name[1].val();
+			var radios = document.forms[0].gender;
+			for (var i=0; i<radios.length; i++) {
+				if (radios[i].value == "Male" && item.gender[1] == "Male") {
+					radios[i].attr("checked", "checked");
+				} else if (radios[i].value == "Female" && item.gender[1] == "Female") {
+					radios[i].attr("checked", "checked");
+				};
+			};
+			if (item.favorite_KoolPet[1] == "Yes") {
+				$("#favePet").attr("value", "On");
+			};
+			$("#koolness").value = item.koolness[1].val();
+			$("#comments").value = item.comments[1].val();
+				
+			// Remove the initial listener from the input "save pet" button.
+			createPet.off("click", submit);
+			// Change SaveData button Value to Edit Button
+			// $("submit").value = "Edit KoolPet";
+			$("#submit").val("Edit KoolPet!");
+			var editSubmit = $("#submit");
+				
+			// Save the key value established in this function as a prop of the editSubmit event
+			// so we can use that value when we save the data we edited.
+			editSubmit.on("click", submit);
+			editSubmit.key = this.key;
+			
 		},
 		error: function(status) {
 			console.log(status);
@@ -103,10 +138,20 @@ var updatePet = function(key) {
 	});
 };
 	
-	// Delete portion of CRUD
+// My Clear Data Function
+// Delete portion of CRUD
 var deletePet = function(key) {
 	$.couch.db("asd1211").removeDoc(doc, {
 		success: function(data) {
+			if(couch.db("asd1211").length === 0) {
+				alert("No KoolPets in the KoolPetsDex.");
+			} else {
+				couch.db("asd1211").empty();
+				alert("All KoolPets have been Released!");
+				window.location.reload();
+				return false;
+			};
+			$('#petList').listview('refresh');
 			console.log(data);
 		},
 		error: function(data) {
@@ -178,7 +223,7 @@ var deletePet = function(key) {
 	var pet					= {};
 		pet.petGroups		= ["KoolPet Type: ", $('#petGroups').val()];
 		pet.petName			= ["KoolPet\'s Name: ", $('#petName').val()];
-		pet.genVal			= ["Gender: ", $('input:radio[name=genVal]:checked').val()];
+		pet.genderVal		= ["Gender: ", $('input:radio[name=genderVal]:checked').val()];
 		pet.favePet			= ["Favorite KoolPet: ", $('input:slider[name=favePet]:on').val()];
 		pet.koolness		= ["Koolness Factor: ", $('#koolness').val()];
 		pet.comments		= ["Comments: ", $('#comments').val()];
@@ -199,7 +244,7 @@ var deletePet = function(key) {
 
 // My Make Item Links Function
 	// Create the edit and delete links for each stored item when displayed.
-	var makeItemLinks = function(key, linksLi) {
+/*	var makeItemLinks = function(key, linksLi) {
 		// Add edit single item link
 		var editLink = $('<a>');
 		editLink.attr("href", "#addItem");
@@ -267,11 +312,11 @@ var deletePet = function(key) {
 		// Populate the form fields with current localStorage values.
 		$("#petGroups").value = item.petGroups[1].val();
 		$("#petName").value = item.petName[1].val();
-		var radios = document.forms[0].genVal;
+		var radios = document.forms[0].genderVal;
 		for (var i=0; i<radios.length; i++) {
-			if (radios[i].value == "Male" && item.genVal[1] == "Male") {
+			if (radios[i].value == "Male" && item.genderVal[1] == "Male") {
 				radios[i].attr("checked", "checked");
-			} else if (radios[i].value == "Female" && item.genVal[1] == "Female") {
+			} else if (radios[i].value == "Female" && item.genderVal[1] == "Female") {
 				radios[i].attr("checked", "checked");
 			};
 		};
@@ -305,11 +350,11 @@ var	deleteItem = function (){
 	} else {
 		alert("KoolPet was NOT Released!");
 	};
-};
+};*/
 
 
 // My Clear Data Function
-var clearDataStorage = function(){
+/*var clearDataStorage = function(){
 	if(localStorage.length === 0) {
 		alert("No KoolPets in the KoolPetsDex.");
 	} else {
@@ -318,7 +363,7 @@ var clearDataStorage = function(){
 		window.location.reload();
 		return false;
 	};
-};
+};*/
 
 // Save this code!
 var changePage = function(pageId) {
@@ -331,11 +376,9 @@ var changePage = function(pageId) {
 	});
 };
 
-// My Variables
-/*	var saveData = $("#submit");
-	saveData.on('click', myForm.validate);*/
-
 }); // End code for page.
+
+
 
 
 $("#showItem").on("pageinit", function() {
@@ -351,18 +394,6 @@ $("#showItem").on("pageinit", function() {
 			$('#searchResults').html("");
 		}
 	};
-
-// My Clear Data Function
-/*var clearDataStorage = function(){
-	if(localStorage.length === 0) {
-		alert("No KoolPets in the KoolPetsDex.");
-	} else {
-		localStorage.empty();
-		alert("All KoolPets have been Released!");
-		window.location.reload();
-		return false;
-	};
-};*/
 
 	var changePage = function(pageId) {
 		$('#' + pageId).trigger('pageinit');
@@ -412,6 +443,12 @@ $("#filter").keyup(function(){
 
 }; // end search function
 
+//My Variables
+var showPet = $("#showData");
+showPet.on('click', readPet);
+var clearLink = $("#clearData");	
+clearLink.on('click', deletePet);
+
 //var showJSON = $("#sJ");
 //showJSON.on('click', showJ);
 //var showXML = $("#sX");
@@ -433,9 +470,9 @@ $("#filter").keyup(function(){
 					$('<li>').append(
 						$('<a>')
 							.attr("href", "pets.html?group=" + item.koolPet_Groups)
-							.text("Name: " + item.koolPet_Name + " in Group: " + item.koolPet_Groups + " " + item.genderVal)
+							.text("Name: " + item.koolPet_Name + " in Group: " + item.koolPet_Groups + " Gender: " + item.gender + " Favorite KoolPet: " + item.favorite_KoolPet + " Koolness Factor: " + item.koolness + " and Comments: " + item.comments)
 					)
-					//console.log(koolPet_Name + koolPet_Groups + gender + favorite_KoolPet + koolness + comments);
+					//console.log(item.koolPet_Name + item.koolPet_Groups + item.gender + item.favorite_KoolPet + item.koolness + item.comments);
 				);
 			});
 			$('#petList').listview('refresh');
@@ -446,15 +483,41 @@ $("#filter").keyup(function(){
 	});
 
 // This is to get images for the correct category.
-var getImg = function(catName, makeSubList) {
+// This is just not working anyways.
+/*var getImg = function(catName, makeSubList) {
 	var imgLi = $('<li>');
 	makeSubList.append(imgLi);
 	var newImg = $('<img>');
 	var setSrc = newImg.attr("src", "" + catName + ".png");
 	imgLi.append(newImg);
-};
+};*/
 
+	// My Clear Data Function
+	// Delete portion of CRUD
+	var deletePet = function(key) {
+		$.couch.db("asd1211").removeDoc(doc, {
+			success: function(data) {
+				if(localStorage.length === 0) {
+					alert("No KoolPets in the KoolPetsDex.");
+				} else {
+					couch.db("asd1211").empty();
+					alert("All KoolPets have been Released!");
+					window.location.reload();
+					return false;
+				};
+				$('#petList').listview('refresh');
+				console.log(data);
+			},
+			error: function(data) {
+				console.log(status);
+			}
+		});
+	};
+	
 }); // End code for page.
+
+
+
 
 var urlVars = function(urlData) {
 	var urlData = $($.mobile.activePage).data("url");
@@ -475,9 +538,33 @@ $("#showPets").on("pageinit", function() {
 	console.log("Show Pets page loaded!");
 	
 	var pets = urlVars()["group"];
-	console.log(pets);
+	/*console.log(pets);
 	$.couch.db("asd1211").view("koolpetsdex/groups", {
 		key: "groups: " + "petGroups"
+	});*/
+	
+	$.couch.db("asd1211").view("koolpetsdex/groups", {
+		success: function(data) {
+			key: "groups: " + "petGroups"
+			console.log(data);
+			$('#petList').empty();
+			$.each(data.rows, function(index, pet) {
+				var item = (pet.value || pet.doc);
+				$('#petList').append(
+					$('<li>').append(
+						$('<a>')
+							.attr("href", "pets.html?group=" + item.koolPet_Groups)
+							.text("Name: " + item.koolPet_Name + " in Group: " + item.koolPet_Groups + " " + item.genderVal)
+					)
+					//console.log(koolPet_Name + koolPet_Groups + gender + favorite_KoolPet + koolness + comments);
+					//console.log(petName + petGroups + genderVal + favePet + koolness + comments);
+				);
+			});
+			$('#petList').listview('refresh');
+		},
+		error: function(status) {
+			console.log(status);
+		}
 	});
 	
 	var changePage = function(pageId) {
