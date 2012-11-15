@@ -203,168 +203,6 @@ var deletePet = function(key) {
 	//any other code needed for addItem page goes here
 
 
-//The functions below can go inside or outside the pageinit function for the page in which it is needed.
-
-// My storeData function
-/*var storeData = function(key){
-	// If there isn't a key, this means this is a brand new item and we need a new key.
-	if (!key) {
-		var id				= Math.floor(Math.random()*10000001);
-	} else {
-		// Set the id to the existing key I'm editing so that it will save over the data.
-		// The key is the same key that's been passed along from the editSubmit event handler
-		// to the validate function, and then passed here, into the storeData function.
-		id					= key;
-	};
-	
-	// Gather round ye olde form field values, and store in ye olde objects.
-	// Object props contain array with the form label and input value.
-	
-	var pet					= {};
-		pet.petGroups		= ["KoolPet Type: ", $('#petGroups').val()];
-		pet.petName			= ["KoolPet\'s Name: ", $('#petName').val()];
-		pet.genderVal		= ["Gender: ", $('input:radio[name=genderVal]:checked').val()];
-		pet.favePet			= ["Favorite KoolPet: ", $('input:slider[name=favePet]:on').val()];
-		pet.koolness		= ["Koolness Factor: ", $('#koolness').val()];
-		pet.comments		= ["Comments: ", $('#comments').val()];
-	// Save data into Local Storage: Use Stringify to convert the object to a string.
-	localStorage.setItem(id, JSON.stringify(item));
-	console.log(key.val());
-	alert("Pet saved to the KoolPetsDex!");
-}; */
-	
-// This is to get images for the correct category.
-/*	var getImg = function(catName, makeSubList) {
-		var imgLi = $('<li>');
-		makeSubList.append(imgLi);
-		var newImg = $('<img>');
-		var setSrc = newImg.attr("src", "images/" + catName + ".png");
-		imgLi.append(newImg);
-	}; */
-
-// My Make Item Links Function
-	// Create the edit and delete links for each stored item when displayed.
-/*	var makeItemLinks = function(key, linksLi) {
-		// Add edit single item link
-		var editLink = $('<a>');
-		editLink.attr("href", "#addItem");
-		editLink.key = key;
-		var editText = "Edit KoolPet";
-		editLink.addClass("editLink")
-			.on('click', editItem)
-			.html(editText);
-		linksLi.appendTo(editLink);
-
-		// Add my line break
-		var breakTag = $('<br>');
-		linksLi.append(breakTag);
-
-
-		// Add delete single item link
-		var deleteLink = $('<a>');
-		deleteLink.attr("href", "#addItem");
-		deleteLink.key = key;
-		var deleteText = "Release KoolPet";
-		deleteLink.addClass("deleteLink")
-			.on('click', deleteItem)
-			.html(deleteText);
-		linksLi.appendTo(deleteLink);
-	};
-	
-	// This is supposed to write data from Local Storage back to the browser.
-	var makeDiv = $('<div>');
-	// makeDiv.attr("id", "items"); // Found out I don't need this line anymore.
-	var makeList = $('<ul>');
-	// makeDiv.appendChild(makeList); // Modified this line to work with my current code.
-	$('#petList').appendTo(makeList);
-	// This code should add the data to my page when I press show data.
-	$('#petList').append(makeDiv);
-	// $('petList').style.display = "block";
-	for (var i=0, len=localStorage.length; i<len; i++) {
-		var makeLi = $('<li>');
-		var linksLi = $('<div>');
-		makeList.append(makeLi);
-		var key = localStorage.key(i);
-		var value = localStorage.getItem(key);
-		// Convert strings back to being an object from localStorage value.
-		var object = JSON.parse(value);
-		var makeSubList = $('<div>');
-		makeLi.append(makeSubList);
-		// This next line is to grab the Img that fits the category it's in.
-		getImg(object.petGroups[1], makeSubList);
-		for (var n in object) {
-			var makeSubLi = $('<div>');
-			makeSubList.append(makeSubLi);
-			var optSubText = object[n][0] + " " + object[n][1];
-			makeSubLi.html(optSubText);
-			makeSubList.append(linksLi);
-		};
-		// Create the edit and delete buttons/link for each item in local storage.
-		makeItemLinks(localStorage.key(i), linksLi);
-	};
-
-// My Edit Single Item Function
-	var editItem = function() {
-		// Grab data from the item local storage.
-		var value = localStorage.getItem(this.key);
-		var item = JSON.parse(value);
-		
-		// Populate the form fields with current localStorage values.
-		$("#petGroups").value = item.petGroups[1].val();
-		$("#petName").value = item.petName[1].val();
-		var radios = document.forms[0].genderVal;
-		for (var i=0; i<radios.length; i++) {
-			if (radios[i].value == "Male" && item.genderVal[1] == "Male") {
-				radios[i].attr("checked", "checked");
-			} else if (radios[i].value == "Female" && item.genderVal[1] == "Female") {
-				radios[i].attr("checked", "checked");
-			};
-		};
-		if (item.favePet[1] == "Yes") {
-			$("#favePet").attr("value", "On");
-		};
-		$("#koolness").value = item.koolness[1].val();
-		$("#comments").value = item.comments[1].val();
-		
-		// Remove the initial listener from the input "save pet" button.
-		storeData.off("click", submit);
-		// Change SaveData button Value to Edit Button
-		// $("submit").value = "Edit KoolPet";
-		$("#submit").val("Edit KoolPet!");
-		var editSubmit = $("submit");
-		
-		// Save the key value established in this function as a prop of the editSubmit event
-		// so we can use that value when we save the data we edited.
-		editSubmit.on("click", submit);
-		editSubmit.key = this.key;
-	};
-
-
-// My Delete Item Function
-var	deleteItem = function (){
-	var ask = confirm("Are you sure you want to release this KoolPet?");
-	if (ask) {
-		localStorage.removeItem(this.key);
-		alert("KoolPet WAS Released!!!");
-		window.location.reload();
-	} else {
-		alert("KoolPet was NOT Released!");
-	};
-};*/
-
-
-// My Clear Data Function
-/*var clearDataStorage = function(){
-	if(localStorage.length === 0) {
-		alert("No KoolPets in the KoolPetsDex.");
-	} else {
-		localStorage.empty();
-		alert("All KoolPets have been Released!");
-		window.location.reload();
-		return false;
-	};
-};*/
-
 // Save this code!
 var changePage = function(pageId) {
 	$('#' + pageId).trigger('pageinit');
@@ -444,8 +282,8 @@ $("#filter").keyup(function(){
 }; // end search function
 
 //My Variables
-var showPet = $("#showData");
-showPet.on('click', readPet);
+/*var showPet = $("#showData");
+showPet.on('click', readPet);*/
 var clearLink = $("#clearData");	
 clearLink.on('click', deletePet);
 
@@ -458,29 +296,28 @@ clearLink.on('click', deletePet);
 
 
 // AJAX function to call the JSON data.
-//function showJ() {
 
-	$.couch.db("asd1211").view("koolpetsdex/pets", {
-		success: function(data) {
-			console.log(data);
-			$('#petList').empty();
-			$.each(data.rows, function(index, pet) {
-				var item = (pet.value || pet.doc);
-				$('#petList').append(
-					$('<li>').append(
-						$('<a>')
-							.attr("href", "pets.html?group=" + item.koolPet_Groups)
-							.text("Name: " + item.koolPet_Name + " in Group: " + item.koolPet_Groups + " Gender: " + item.gender + " Favorite KoolPet: " + item.favorite_KoolPet + " Koolness Factor: " + item.koolness + " and Comments: " + item.comments)
-					)
-					//console.log(item.koolPet_Name + item.koolPet_Groups + item.gender + item.favorite_KoolPet + item.koolness + item.comments);
-				);
-			});
-			$('#petList').listview('refresh');
-		},
-		error: function(status) {
-			console.log(status);
-		}
-	});
+$.couch.db("asd1211").view("koolpetsdex/pets", {
+	success: function(data) {
+		console.log(data);
+		$('#petList').empty();
+		$.each(data.rows, function(index, pet) {
+			var item = (pet.value || pet.doc);
+			$('#petList').append(
+				$('<li>').append(
+					$('<a>')
+						.attr("href", "pets.html?group=" + item.koolPet_Groups)
+						.text("Name: " + item.koolPet_Name + ", Group: " + item.koolPet_Groups + ", Gender: " + item.gender + ", Favorite: " + item.favorite_KoolPet + ", Koolness Factor: " + item.koolness + ", Comments: " + item.comments)
+				)
+				//console.log(item.koolPet_Name + item.koolPet_Groups + item.gender + item.favorite_KoolPet + item.koolness + item.comments);
+			);
+		});
+		$('#petList').listview('refresh');
+	},
+	error: function(status) {
+		console.log(status);
+	}
+});
 
 // This is to get images for the correct category.
 // This is just not working anyways.
@@ -578,3 +415,167 @@ $("#showPets").on("pageinit", function() {
 	};
 });	// End code for show pets page.
 
+// Unneeded code anymore, but saving it for debugging, and refactoring later.
+
+
+//The functions below can go inside or outside the pageinit function for the page in which it is needed.
+
+//My storeData function
+/*var storeData = function(key){
+	// If there isn't a key, this means this is a brand new item and we need a new key.
+	if (!key) {
+		var id				= Math.floor(Math.random()*10000001);
+	} else {
+		// Set the id to the existing key I'm editing so that it will save over the data.
+		// The key is the same key that's been passed along from the editSubmit event handler
+		// to the validate function, and then passed here, into the storeData function.
+		id					= key;
+	};
+	
+	// Gather round ye olde form field values, and store in ye olde objects.
+	// Object props contain array with the form label and input value.
+	
+	var pet					= {};
+		pet.petGroups		= ["KoolPet Type: ", $('#petGroups').val()];
+		pet.petName			= ["KoolPet\'s Name: ", $('#petName').val()];
+		pet.genderVal		= ["Gender: ", $('input:radio[name=genderVal]:checked').val()];
+		pet.favePet			= ["Favorite KoolPet: ", $('input:slider[name=favePet]:on').val()];
+		pet.koolness		= ["Koolness Factor: ", $('#koolness').val()];
+		pet.comments		= ["Comments: ", $('#comments').val()];
+	// Save data into Local Storage: Use Stringify to convert the object to a string.
+	localStorage.setItem(id, JSON.stringify(item));
+	console.log(key.val());
+	alert("Pet saved to the KoolPetsDex!");
+}; */
+	
+//This is to get images for the correct category.
+/*	var getImg = function(catName, makeSubList) {
+		var imgLi = $('<li>');
+		makeSubList.append(imgLi);
+		var newImg = $('<img>');
+		var setSrc = newImg.attr("src", "images/" + catName + ".png");
+		imgLi.append(newImg);
+	}; */
+
+//My Make Item Links Function
+	// Create the edit and delete links for each stored item when displayed.
+/*	var makeItemLinks = function(key, linksLi) {
+		// Add edit single item link
+		var editLink = $('<a>');
+		editLink.attr("href", "#addItem");
+		editLink.key = key;
+		var editText = "Edit KoolPet";
+		editLink.addClass("editLink")
+			.on('click', editItem)
+			.html(editText);
+		linksLi.appendTo(editLink);
+
+		// Add my line break
+		var breakTag = $('<br>');
+		linksLi.append(breakTag);
+
+
+		// Add delete single item link
+		var deleteLink = $('<a>');
+		deleteLink.attr("href", "#addItem");
+		deleteLink.key = key;
+		var deleteText = "Release KoolPet";
+		deleteLink.addClass("deleteLink")
+			.on('click', deleteItem)
+			.html(deleteText);
+		linksLi.appendTo(deleteLink);
+	};
+	
+	// This is supposed to write data from Local Storage back to the browser.
+	var makeDiv = $('<div>');
+	// makeDiv.attr("id", "items"); // Found out I don't need this line anymore.
+	var makeList = $('<ul>');
+	// makeDiv.appendChild(makeList); // Modified this line to work with my current code.
+	$('#petList').appendTo(makeList);
+	// This code should add the data to my page when I press show data.
+	$('#petList').append(makeDiv);
+	// $('petList').style.display = "block";
+	for (var i=0, len=localStorage.length; i<len; i++) {
+		var makeLi = $('<li>');
+		var linksLi = $('<div>');
+		makeList.append(makeLi);
+		var key = localStorage.key(i);
+		var value = localStorage.getItem(key);
+		// Convert strings back to being an object from localStorage value.
+		var object = JSON.parse(value);
+		var makeSubList = $('<div>');
+		makeLi.append(makeSubList);
+		// This next line is to grab the Img that fits the category it's in.
+		getImg(object.petGroups[1], makeSubList);
+		for (var n in object) {
+			var makeSubLi = $('<div>');
+			makeSubList.append(makeSubLi);
+			var optSubText = object[n][0] + " " + object[n][1];
+			makeSubLi.html(optSubText);
+			makeSubList.append(linksLi);
+		};
+		// Create the edit and delete buttons/link for each item in local storage.
+		makeItemLinks(localStorage.key(i), linksLi);
+	};
+
+//My Edit Single Item Function
+	var editItem = function() {
+		// Grab data from the item local storage.
+		var value = localStorage.getItem(this.key);
+		var item = JSON.parse(value);
+		
+		// Populate the form fields with current localStorage values.
+		$("#petGroups").value = item.petGroups[1].val();
+		$("#petName").value = item.petName[1].val();
+		var radios = document.forms[0].genderVal;
+		for (var i=0; i<radios.length; i++) {
+			if (radios[i].value == "Male" && item.genderVal[1] == "Male") {
+				radios[i].attr("checked", "checked");
+			} else if (radios[i].value == "Female" && item.genderVal[1] == "Female") {
+				radios[i].attr("checked", "checked");
+			};
+		};
+		if (item.favePet[1] == "Yes") {
+			$("#favePet").attr("value", "On");
+		};
+		$("#koolness").value = item.koolness[1].val();
+		$("#comments").value = item.comments[1].val();
+		
+		// Remove the initial listener from the input "save pet" button.
+		storeData.off("click", submit);
+		// Change SaveData button Value to Edit Button
+		// $("submit").value = "Edit KoolPet";
+		$("#submit").val("Edit KoolPet!");
+		var editSubmit = $("submit");
+		
+		// Save the key value established in this function as a prop of the editSubmit event
+		// so we can use that value when we save the data we edited.
+		editSubmit.on("click", submit);
+		editSubmit.key = this.key;
+	};
+
+
+//My Delete Item Function
+var	deleteItem = function (){
+	var ask = confirm("Are you sure you want to release this KoolPet?");
+	if (ask) {
+		localStorage.removeItem(this.key);
+		alert("KoolPet WAS Released!!!");
+		window.location.reload();
+	} else {
+		alert("KoolPet was NOT Released!");
+	};
+};*/
+
+
+//My Clear Data Function
+/*var clearDataStorage = function(){
+	if(localStorage.length === 0) {
+		alert("No KoolPets in the KoolPetsDex.");
+	} else {
+		localStorage.empty();
+		alert("All KoolPets have been Released!");
+		window.location.reload();
+		return false;
+	};
+};*/
