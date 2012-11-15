@@ -25,13 +25,32 @@ $("#home").on("pageinit", function() {
 
 $("#addItem").on("pageinit", function() {
 	console.log("Add Item page loaded!");
+
+// My Variables
+/*var showData = $("#showData");
+showData.on('click', getData);
+var clearLink = $("#clearData");	
+clearLink.on('click', clearDataStorage);
+var saveData = $("#submit");
+saveData.on('click', createPet);*/
 	
 	var doc = {
-		"_id": "7697f43997fcc700d494bbc3720007b9"
-		"_rev": "1-0184c44d84fe480e7db53a96020657f5"
+			
 	};
 	
+	doc._id = "pets:" + variable;
+	// to give it a custom id
+	doc.petGroups = "petGroup";
+	doc.petName = "petName";
+	doc.genderVal = "genderVal";
+	doc.favePet = "favePet";
+	doc.koolness = "koolness";
+	doc.comments = "comments";
+	// etc.
+	
 	// Create portion of CRUD
+	// Wrap in a save data function, like storeData from before.
+var createPet = function(key){
 	$.couch.db("asd1211").saveDoc(doc, {
 	    success: function(data) {
 	        console.log(data);
@@ -46,8 +65,10 @@ $("#addItem").on("pageinit", function() {
 	        
 	    }
 	});
+};
 	
 	// Read portion of CRUD
+var readPet = function(){
 	$.couch.db("asd1211").view("koolpetsdex/pets", {
 		success: function(data) {
 			console.log(data);
@@ -68,8 +89,10 @@ $("#addItem").on("pageinit", function() {
 			console.log(status);
 		}
 	});
+};
 	
 	// Update portion of CRUD
+var updatePet = function(key) {
 	$.couch.db("asd1211").openDoc(doc, {
 		success: function(data) {
 			console.log(data);
@@ -78,8 +101,10 @@ $("#addItem").on("pageinit", function() {
 			console.log(status);
 		}
 	});
+};
 	
 	// Delete portion of CRUD
+var deletePet = function(key) {
 	$.couch.db("asd1211").removeDoc(doc, {
 		success: function(data) {
 			console.log(data);
@@ -88,6 +113,7 @@ $("#addItem").on("pageinit", function() {
 			console.log(status);
 		}
 	});
+};
 	
 	// This line of code is supposed to console log every div I click on in the add item page.
 	$('#petsForm div').on('click', function(e){
@@ -133,7 +159,6 @@ $("#addItem").on("pageinit", function() {
 
 
 //The functions below can go inside or outside the pageinit function for the page in which it is needed.
-
 
 // My storeData function
 /*var storeData = function(key){
@@ -307,8 +332,8 @@ var changePage = function(pageId) {
 };
 
 // My Variables
-	var saveData = $("#submit");
-	saveData.on('click', myForm.validate);
+/*	var saveData = $("#submit");
+	saveData.on('click', myForm.validate);*/
 
 }); // End code for page.
 
@@ -408,7 +433,7 @@ $("#filter").keyup(function(){
 					$('<li>').append(
 						$('<a>')
 							.attr("href", "pets.html?group=" + item.koolPet_Groups)
-							.text("Name: " + item.koolPet_Name + " in Group: " + item.koolPet_Groups)
+							.text("Name: " + item.koolPet_Name + " in Group: " + item.koolPet_Groups + " " + item.genderVal)
 					)
 					//console.log(koolPet_Name + koolPet_Groups + gender + favorite_KoolPet + koolness + comments);
 				);
@@ -428,16 +453,6 @@ var getImg = function(catName, makeSubList) {
 	var setSrc = newImg.attr("src", "" + catName + ".png");
 	imgLi.append(newImg);
 };
-
-
-// My Variables
-	/*var showData = $("#showData");
-	showData.on('click', getData);
-	var clearLink = $("#clearData");	
-	clearLink.on('click', clearDataStorage);
-	var saveData = $("#submit");
-	saveData.on('click', myForm.validate);*/
-
 
 }); // End code for page.
 
